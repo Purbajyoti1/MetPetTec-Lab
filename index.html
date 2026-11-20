@@ -1,0 +1,2061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MetPetTec Lab | Metamorphic Petrology and Tectonics Laboratory</title>
+<meta name="description" content="Dr. Purbajyoti Phukon, Assistant Professor, Department of Applied Geology, Dibrugarh University. Metamorphic petrology, petrochronology and continental tectonics of the Himalaya.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=Spectral:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout idea: a geological-map legend. Quiet graphite text on rock-grey paper,
+     condensed uppercase labels like map annotations, one glacier-blue accent, and a
+     single bold figure (the P–T diagram) on the home page. */
+  --paper: #f4f5f2;
+  --surface: #ffffff;
+  --ink: #1d2226;
+  --muted: #59636a;
+  --rule: #d8dcd6;
+  --accent: #17607a;
+  --kyanite: #2f5d8a;
+  --tint: rgba(23, 96, 122, 0.08);
+  --melt: #b24a2e;
+  --melt-tint: rgba(178, 74, 46, 0.08);
+  --hero-accent: #1d7491;
+  --hero-shade: 7, 26, 38;
+  --hero-accent-hover: #238aac;
+  --font-display: "Spectral", "Iowan Old Style", Georgia, serif;
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-label: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --step--1: 0.875rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.25rem;
+  --step-2: 1.6rem;
+  --step-3: 2.2rem;
+  --step-4: clamp(2.5rem, 5.4vw, 3.9rem);
+  --radius: 6px;
+  --max: 1120px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #121518;
+    --surface: #1a1f23;
+    --ink: #e6e9e5;
+    --muted: #9ba4a9;
+    --rule: #2d3439;
+    --accent: #6cc0db;
+    --kyanite: #85acd4;
+    --tint: rgba(108, 192, 219, 0.12);
+    --melt: #e98a6b;
+    --melt-tint: rgba(233, 138, 107, 0.12);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #121518;
+  --surface: #1a1f23;
+  --ink: #e6e9e5;
+  --muted: #9ba4a9;
+  --rule: #2d3439;
+  --accent: #6cc0db;
+  --kyanite: #85acd4;
+  --tint: rgba(108, 192, 219, 0.12);
+  --melt: #e98a6b;
+  --melt-tint: rgba(233, 138, 107, 0.12);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
+body { overflow-x: clip; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+}
+img { max-width: 100%; }
+a { color: var(--accent); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: 1.15; text-wrap: balance; margin: 0; }
+h2 { font-size: var(--step-3); }
+h3 { font-size: var(--step-1); }
+p { margin: 0; }
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+.label {
+  font-family: var(--font-label);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+.measure { max-width: 66ch; }
+.justify { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+.stack { display: flex; flex-direction: column; gap: 16px; }
+
+/* Header */
+.site-header {
+  position: sticky; top: 0; z-index: 10;
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--rule);
+}
+.header-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 64px; }
+.brand { display: flex; flex-direction: row; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
+.brand-logo { flex: none; width: 46px; height: 46px; border-radius: 50%; background: #ffffff; }
+.brand-text { display: flex; flex-direction: column; line-height: 1.1; }
+@media (max-width: 420px) { .brand-logo { width: 38px; height: 38px; } .brand { gap: 10px; } }
+.brand-name { font-family: var(--font-label); font-weight: 600; font-size: 1.45rem; letter-spacing: 0.03em; }
+.brand-sub { font-size: var(--step--1); color: var(--muted); }
+@media (min-width: 700px) { .brand-sub { white-space: nowrap; } }
+.nav { display: flex; gap: 2px; flex-wrap: nowrap; justify-content: flex-end; }
+.nav a {
+  font-family: var(--font-label); font-weight: 500; text-transform: uppercase; letter-spacing: 0.07em;
+  font-size: 1rem; color: var(--muted); text-decoration: none; padding: 6px 8px; border-radius: var(--radius); white-space: nowrap;
+}
+.nav a:hover { color: var(--ink); background: var(--tint); }
+.nav a[aria-current="page"] { color: var(--accent); box-shadow: inset 0 -2px 0 var(--accent); border-radius: 0; }
+.menu-btn {
+  display: none; font-family: var(--font-label); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+  font-size: 1rem; background: transparent; color: var(--ink); border: 1px solid var(--rule); border-radius: var(--radius);
+  padding: 6px 12px; cursor: pointer;
+}
+@media (max-width: 1040px) {
+  .menu-btn { display: inline-block; }
+  .nav { display: none; position: absolute; left: 0; right: 0; top: 100%; background: var(--paper); border-bottom: 1px solid var(--rule); flex-direction: column; padding: 8px 16px 16px; }
+  .nav.open { display: flex; }
+  .nav a[aria-current="page"] { box-shadow: inset 3px 0 0 var(--accent); }
+}
+
+/* Views */
+main.wrap { padding-top: 48px; padding-bottom: 72px; }
+.view { display: none; }
+.view.active { display: block; }
+.page-head { display: flex; flex-direction: column; gap: 10px; padding-bottom: 28px; margin-bottom: 36px; border-bottom: 1px solid var(--rule); }
+.page-head p { color: var(--muted); }
+.page-head > p:not(.label) { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+section + section, .hero-band + section { margin-top: 64px; }
+.section-title { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+
+/* Hero */
+.hero-band {
+  /* Full-bleed landscape band. Always dark, in both themes, so the text over it stays legible. */
+  position: relative; overflow: hidden; isolation: isolate;
+  margin-inline: calc(50% - 50vw); margin-top: -48px;
+  background: #18222d; color: #f2f4f1; color-scheme: dark;
+}
+.hero-band.has-photo { background: #18222d url("assets/himalaya.jpg") center 45% / cover no-repeat; }
+.hero-band.has-photo #ridge { display: none; }
+#ridge { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; }
+.hero-shade {
+  position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(var(--hero-shade), 0.88) 0%, rgba(var(--hero-shade), 0.66) 42%, rgba(var(--hero-shade), 0.12) 78%, rgba(var(--hero-shade), 0) 100%),
+    linear-gradient(0deg, rgba(var(--hero-shade), 0.55) 0%, rgba(var(--hero-shade), 0) 35%);
+}
+@media (max-width: 760px) { .hero-shade { background: linear-gradient(180deg, rgba(var(--hero-shade), 0.70), rgba(var(--hero-shade), 0.86)); } }
+.hero-content { position: relative; padding-top: clamp(64px, 10vw, 112px); padding-bottom: clamp(64px, 10vw, 112px); }
+.hero-text { max-width: 640px; }
+.hero-band .label { color: rgba(242, 244, 241, 0.78); }
+.affil { display: flex; align-items: center; gap: 16px; padding-bottom: 18px; margin-bottom: 22px; border-bottom: 1px solid rgba(255, 255, 255, 0.18); max-width: 460px; }
+.affil-logo { flex: none; width: 76px; height: 76px; border-radius: 50%; background: #ffffff; box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.92), 0 6px 18px rgba(0, 0, 0, 0.35); }
+.affil-text { display: flex; flex-direction: column; gap: 2px; line-height: 1.25; }
+.affil-dept { font-family: var(--font-label); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.95rem; color: rgba(242, 244, 241, 0.80); }
+.affil-uni { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem; color: #ffffff; }
+@media (max-width: 420px) { .affil-logo { width: 56px; height: 56px; } .affil-uni { font-size: 1.15rem; } }
+.hero-band h1 { font-size: var(--step-4); letter-spacing: -0.01em; margin: 0 0 14px; color: #ffffff; }
+.hero-band .lede { font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: var(--step-1); color: #f2f4f1; max-width: 36ch; }
+.hero-band .intro { margin-top: 18px; color: rgba(242, 244, 241, 0.86); max-width: 60ch; }
+.hero-band .btn { background: transparent; color: #ffffff; border-color: rgba(255, 255, 255, 0.55); }
+.hero-band .btn:hover { border-color: #ffffff; background: rgba(255, 255, 255, 0.08); color: #ffffff; }
+.hero-band .btn.primary { background: var(--hero-accent); border-color: var(--hero-accent); color: #ffffff; }
+.hero-band .btn.primary:hover { background: var(--hero-accent-hover); border-color: var(--hero-accent-hover); }
+.hero-band :focus-visible { outline-color: #ffffff; }
+.photo-credit { position: absolute; right: 16px; bottom: 10px; font-size: 0.78rem; color: rgba(242, 244, 241, 0.7); margin: 0; }
+.photo-credit a { color: inherit; }
+.themes-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr); gap: 48px; align-items: start; }
+.themes-grid .legend { grid-template-columns: 1fr; }
+@media (max-width: 900px) { .themes-grid { grid-template-columns: 1fr; } }
+.btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+  font-family: var(--font-label); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 1rem;
+  padding: 9px 16px; border-radius: var(--radius); border: 1px solid var(--rule); color: var(--ink); background: var(--surface);
+  cursor: pointer;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+.btn.primary:hover { filter: brightness(1.08); color: var(--paper); }
+figure { margin: 0; }
+.pt-figure { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 14px 14px 12px; }
+.pt-figure canvas { display: block; width: 100%; height: auto; aspect-ratio: 10 / 8; }
+.pt-figure figcaption { font-size: var(--step--1); color: var(--muted); margin-top: 8px; line-height: 1.45; }
+.pt-figure figcaption b { color: var(--ink); font-weight: 600; }
+
+/* Legend (research themes) */
+.legend { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 48px; }
+@media (max-width: 700px) { .legend { grid-template-columns: 1fr; } }
+.legend li { padding: 18px 0; border-top: 1px solid var(--rule); }
+.legend h3 { font-size: 1.15rem; margin-bottom: 4px; }
+.legend p { color: var(--muted); font-size: 0.98rem; }
+
+/* Home lower grid */
+.home-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 48px; }
+@media (max-width: 860px) { .home-grid { grid-template-columns: 1fr; } }
+.news { list-style: none; margin: 0; padding: 0; }
+.news li { display: grid; grid-template-columns: 92px 1fr; gap: 16px; padding: 14px 0; border-top: 1px solid var(--rule); }
+.news .date { font-family: var(--font-label); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-variant-numeric: tabular-nums; }
+.news p { font-size: 0.98rem; }
+.news .kind { display: block; font-size: var(--step--1); color: var(--muted); }
+.doi { display: block; margin-top: 2px; font-size: 0.92rem; color: var(--muted); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.panel { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 22px; }
+.panel + .panel { margin-top: 20px; }
+.panel h3 { margin-bottom: 10px; }
+.callout { border-left: 3px solid var(--accent); }
+dl.contact { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; margin: 0; font-size: 0.98rem; }
+dl.contact dt { font-family: var(--font-label); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+dl.contact dd { margin: 0; overflow-wrap: anywhere; }
+@media (max-width: 420px) { dl.contact { grid-template-columns: 1fr; gap: 0; } dl.contact dd { margin-bottom: 10px; } }
+.copy { font: inherit; font-size: var(--step--1); margin-left: 8px; padding: 1px 8px; border: 1px solid var(--rule); border-radius: 4px; background: transparent; color: var(--muted); cursor: pointer; }
+.copy:hover { color: var(--accent); border-color: var(--accent); }
+
+/* About */
+.two-col { display: grid; grid-template-columns: minmax(0, 260px) minmax(0, 1fr); gap: 48px; align-items: start; }
+@media (max-width: 760px) { .two-col { grid-template-columns: 1fr; gap: 28px; } }
+.portrait {
+  aspect-ratio: 4 / 5; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--rule);
+  display: grid; place-items: center; position: relative; overflow: hidden;
+}
+.portrait span { font-family: var(--font-display); font-size: 4.4rem; color: var(--accent); letter-spacing: 0.02em; position: relative; }
+.portrait canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.5; }
+.portrait img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+.two-col { grid-template-columns: minmax(0, 220px) minmax(0, 1fr); }
+.scholars { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
+.scholar { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 24px 22px 22px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.scholar-photo { display: block; width: 150px; height: 188px; object-fit: cover; object-position: center 20%; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--paper); }
+.scholar-body { padding-top: 16px; display: flex; flex-direction: column; align-items: center; gap: 14px; flex: 1; width: 100%; }
+.scholar-name { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem; line-height: 1.2; margin: 0; }
+.scholar-role { margin-top: 4px; font-family: var(--font-label); font-weight: 600; letter-spacing: 0.04em; font-size: 1.05rem; color: var(--accent); }
+.scholar-topic { border-top: 1px solid var(--rule); padding-top: 12px; width: 100%; }
+.scholar-topic .label { display: block; font-size: 0.82rem; margin-bottom: 4px; }
+.scholar-topic p { font-size: 1rem; line-height: 1.5; color: var(--ink); }
+.scholar .meta { margin-top: auto; }
+.status.submitted { color: var(--paper); background: var(--accent); border-color: var(--accent); }
+.status.ongoing { color: var(--accent); border-color: currentColor; }
+.diss { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.diss li b { font-weight: 600; }
+.diss li span { display: block; font-family: var(--font-display); font-style: italic; color: var(--muted); line-height: 1.45; }
+.profile-links { display: flex; flex-direction: column; gap: 8px; margin-top: 18px; font-size: 0.98rem; }
+.timeline { list-style: none; margin: 0; padding: 0; }
+.bio p { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+[data-view="about"] .two-col > .stack { gap: 0; }
+[data-view="about"] .two-col > .stack > section + section,
+[data-view="about"] .two-col > .stack > section + div,
+[data-view="about"] .two-col > .stack > div { margin-top: 36px; }
+.timeline li { display: grid; grid-template-columns: 132px 1fr; gap: 16px; padding: 12px 0; border-top: 1px solid var(--rule); }
+.timeline .when { font-family: var(--font-label); font-weight: 600; letter-spacing: 0.06em; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.timeline .what b { font-weight: 600; }
+.timeline .what span { display: block; color: var(--muted); font-size: 0.96rem; }
+@media (max-width: 520px) { .timeline li, .news li { grid-template-columns: 1fr; gap: 2px; } }
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+.plain { margin: 0; padding-left: 1.1em; }
+.plain li { margin: 6px 0; }
+.plain li span { color: var(--muted); }
+
+/* Research */
+.theme { padding: 26px 0; border-top: 1px solid var(--rule); }
+.theme:first-child { border-top: 0; padding-top: 0; }
+.research-head .stack { gap: 12px; }
+.research-head .stack > p:not(.label) { max-width: none; }
+[data-view="research"] .page-head .stack > p:not(.label),
+[data-view="research"] .theme p:not(.refs),
+[data-view="research"] .inst span { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+.theme h3 { font-size: var(--step-2); margin-bottom: 10px; }
+.theme p { max-width: none; }
+.theme .refs { margin-top: 10px; font-size: 0.96rem; color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0; }
+.chips li { border: 1px solid var(--rule); border-radius: 999px; padding: 4px 12px; font-size: 0.95rem; background: var(--surface); }
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.98rem; }
+th, td { text-align: left; vertical-align: top; padding: 12px 14px 12px 0; border-top: 1px solid var(--rule); }
+th { font-family: var(--font-label); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-size: 0.92rem; }
+.projects { list-style: none; margin: 0; padding: 0; }
+.projects li { padding: 18px 0; border-top: 1px solid var(--rule); }
+.projects li:last-child { border-bottom: 1px solid var(--rule); }
+.proj-title { font-family: var(--font-display); font-weight: 600; font-size: 1.12rem; line-height: 1.4; max-width: 80ch; }
+.proj-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 22px; margin-top: 8px; font-size: 0.96rem; color: var(--muted); }
+.proj-meta b { color: var(--ink); font-weight: 600; }
+.status { display: inline-block; font-size: var(--step--1); padding: 1px 8px; border-radius: 999px; border: 1px solid var(--rule); color: var(--muted); white-space: nowrap; }
+
+/* Publications */
+.pub-tools { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 8px; }
+.pub-tools input {
+  font: inherit; font-size: 1rem; padding: 8px 12px; border: 1px solid var(--rule); border-radius: var(--radius);
+  background: var(--surface); color: var(--ink); min-width: 0; flex: 1 1 260px; max-width: 420px;
+}
+.seg { display: inline-flex; border: 1px solid var(--rule); border-radius: var(--radius); overflow: hidden; }
+.seg button {
+  font-family: var(--font-label); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.95rem;
+  background: var(--surface); color: var(--muted); border: 0; padding: 8px 12px; cursor: pointer;
+}
+.seg button + button { border-left: 1px solid var(--rule); }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--paper); }
+.pub-count { color: var(--muted); font-size: var(--step--1); margin-bottom: 18px; }
+.year-group { display: grid; grid-template-columns: 80px minmax(0, 1fr); gap: 20px; border-top: 1px solid var(--ink); padding-top: 12px; margin-top: 18px; }
+.year-group h3 { font-family: var(--font-label); font-size: 1.5rem; letter-spacing: 0.04em; color: var(--muted); font-variant-numeric: tabular-nums; }
+.pubs { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 18px; }
+.pub .title { font-family: var(--font-display); font-weight: 600; font-size: 1.1rem; line-height: 1.35; }
+.pub .authors { font-size: 0.96rem; margin-top: 3px; }
+.pub .authors strong { font-weight: 600; color: var(--ink); }
+.pub .venue { font-size: 0.96rem; color: var(--muted); }
+.pub .venue i { color: var(--ink); }
+.pub .doi-line { margin-top: 2px; font-size: 0.93rem; color: var(--muted); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.ext-link { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; margin-left: 6px; vertical-align: -5px; border-radius: 6px; color: var(--accent); border: 1px solid var(--rule); background: var(--surface); text-decoration: none; }
+.ext-link:hover { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+.badge { display: inline-block; font-family: var(--font-label); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem; color: var(--accent); border: 1px solid currentColor; border-radius: 3px; padding: 0 6px; margin-left: 6px; vertical-align: 2px; }
+.empty { color: var(--muted); padding: 20px 0; }
+@media (max-width: 600px) { .year-group { grid-template-columns: 1fr; gap: 6px; } }
+.confs { list-style: none; margin: 0; padding: 0; }
+.confs li { padding: 12px 0; border-top: 1px solid var(--rule); font-size: 0.98rem; }
+.confs li span { display: block; color: var(--muted); font-size: 0.94rem; }
+
+/* Group */
+.pi-card { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (max-width: 600px) { .pi-card { grid-template-columns: 1fr; } .pi-card .portrait { max-width: 200px; } }
+.inst { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.inst li { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 16px 18px; }
+.inst b { display: block; font-weight: 600; }
+.inst span { color: var(--muted); font-size: 0.95rem; }
+
+/* Gallery */
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+.tile { margin: 0; }
+.tile .ph { aspect-ratio: 4 / 3; border: 1px dashed var(--rule); border-radius: var(--radius); background: var(--surface); position: relative; overflow: hidden; display: grid; place-items: center; }
+.tile .ph canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.tile .ph span { position: relative; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600; color: var(--muted); background: var(--surface); padding: 4px 10px; border-radius: 4px; font-size: 0.9rem; }
+.tile figcaption { font-size: 0.95rem; color: var(--muted); margin-top: 8px; }
+
+/* Review mode (only with ?review in the address): lets a reviewer comment on any part of the page.
+   Comments are sent to Netlify Forms when the site is hosted on Netlify. */
+.review-bar { position: fixed; right: 16px; bottom: 16px; z-index: 60; display: none; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; max-width: calc(100% - 32px); padding: 10px 12px; background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18); }
+.review-on .review-bar { display: flex; }
+.review-bar .rb-label { font-family: var(--font-label); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.9rem; color: var(--accent); margin-right: 4px; }
+.review-bar .rb-count { font-size: var(--step--1); color: var(--muted); }
+.rv-btn { font-family: var(--font-label); font-weight: 600; letter-spacing: 0.06em; font-size: 1rem; padding: 7px 12px; border-radius: var(--radius); border: 1px solid var(--rule); background: var(--surface); color: var(--ink); cursor: pointer; }
+.rv-btn:hover { border-color: var(--accent); color: var(--accent); }
+.rv-btn.primary { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+.rv-btn.primary:hover { filter: brightness(1.08); color: var(--paper); }
+.rv-btn[disabled] { opacity: 0.6; cursor: wait; }
+.pick-banner { position: fixed; left: 50%; top: 76px; transform: translateX(-50%); z-index: 61; display: none; gap: 12px; align-items: center; padding: 10px 14px; background: var(--ink); color: var(--paper); border-radius: 8px; font-size: 0.98rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25); max-width: calc(100% - 32px); }
+.picking .pick-banner { display: flex; }
+.pick-banner button { font: inherit; font-weight: 600; background: transparent; color: var(--paper); border: 1px solid currentColor; border-radius: 6px; padding: 2px 10px; cursor: pointer; }
+.picking main, .picking .site-header, .picking footer { cursor: crosshair; }
+.pick-hover { outline: 2px dashed var(--accent) !important; outline-offset: 3px; }
+.pick-selected { outline: 2px solid var(--accent) !important; outline-offset: 3px; }
+.rv-dialog { position: fixed; right: 16px; bottom: 16px; z-index: 62; width: min(420px, calc(100% - 32px)); max-height: calc(100% - 100px); overflow: auto; display: none; flex-direction: column; gap: 12px; padding: 18px; background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25); }
+.rv-dialog.open { display: flex; }
+.rv-dialog h3 { font-size: 1.15rem; }
+.rv-target { font-size: 0.92rem; color: var(--muted); background: var(--paper); border: 1px solid var(--rule); border-radius: 8px; padding: 8px 10px; }
+.rv-target b { color: var(--ink); font-weight: 600; }
+.rv-target q { display: block; margin-top: 4px; font-style: italic; }
+.rv-dialog label { font-weight: 600; font-size: 0.95rem; display: flex; flex-direction: column; gap: 4px; }
+.rv-dialog label span { font-weight: 400; color: var(--muted); font-size: var(--step--1); }
+.rv-dialog textarea, .rv-dialog input[type="text"] { font: inherit; font-weight: 400; font-size: 1rem; padding: 8px 10px; border: 1px solid var(--rule); border-radius: 6px; background: var(--paper); color: var(--ink); }
+.rv-dialog textarea { min-height: 110px; resize: vertical; }
+.rv-dialog input[type="file"] { font: inherit; font-weight: 400; font-size: 0.92rem; }
+.rv-actions { display: flex; gap: 8px; justify-content: flex-end; }
+.rv-error { color: #b3261e; font-size: 0.92rem; display: none; }
+.rv-error.show { display: block; }
+.review-on .toast { bottom: 90px; }
+@media (max-width: 600px) { .review-bar { left: 16px; right: 16px; justify-content: space-between; } .rv-dialog { left: 16px; right: 16px; width: auto; } }
+
+/* Footer */
+footer { border-top: 1px solid var(--rule); padding: 28px 0 40px; color: var(--muted); font-size: var(--step--1); }
+.foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; }
+.foot a { color: var(--muted); }
+
+.toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: var(--ink); color: var(--paper); padding: 8px 14px; border-radius: var(--radius); font-size: var(--step--1); opacity: 0; pointer-events: none; transition: opacity .2s; }
+.toast.show { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .toast { transition: none; } }
+
+/* Homepage research-theme image viewer and layout refinements */
+.hero-science-collage.hero-portrait { max-width: 430px !important; justify-self: center; }
+.hero-portrait img { max-height: 390px; }
+@media (max-width: 900px) {
+  .hero-science-collage.hero-portrait { max-width: 340px !important; }
+  .hero-portrait img { max-height: 320px; }
+}
+[data-view="about"] .two-col { grid-template-columns: minmax(0, 1fr); }
+[data-view="group"] .pi-card { grid-template-columns: minmax(0, 1fr); }
+.home-research-card > img {
+  display:block; width:100%; height:150px; object-fit:cover;
+  background:#fff; cursor:zoom-in;
+}
+.home-research-card:nth-child(2) > img,
+.home-research-card:nth-child(4) > img {
+  object-fit:contain; object-position:center; padding:7px; background:#fff;
+}
+.home-research-card:focus-visible > img { outline:3px solid #eeb27f; outline-offset:-3px; }
+.research-card { grid-template-columns:minmax(0,1fr); }
+.research-card-body { min-width:0; }
+@media(max-width:700px) {
+  .home-research-card > img { height:135px; }
+}
+.research-image-lightbox {
+  position:fixed; inset:0; z-index:100000; display:none;
+  align-items:center; justify-content:center; padding:28px;
+  background:rgba(3,12,18,.95);
+}
+.research-image-lightbox.is-open { display:flex; }
+.research-image-lightbox img {
+  display:block; max-width:94vw; max-height:88vh; width:auto; height:auto;
+  object-fit:contain; background:#fff; border-radius:4px;
+  box-shadow:0 18px 60px rgba(0,0,0,.55);
+}
+.research-image-lightbox button {
+  position:absolute; top:15px; right:18px; width:44px; height:44px;
+  display:grid; place-items:center; border:1px solid #ffffff88; border-radius:50%;
+  background:#183343; color:#fff; font:30px/1 sans-serif; cursor:pointer;
+}
+@media(max-width:600px) {
+  .research-image-lightbox { padding:14px; }
+  .research-image-lightbox img { max-width:96vw; max-height:84vh; }
+}
+
+
+/* Sixth research interest: text-led card, avoiding an unprovided or generic image. */
+.home-research-text-card {
+  min-height:165px; display:flex; align-items:center;
+  background:linear-gradient(145deg,rgba(224,161,109,.12),rgba(125,182,202,.08));
+  border:1px solid rgba(173,195,204,.26); border-radius:12px;
+  padding:18px; text-decoration:none; color:inherit;
+}
+.home-research-text-card .home-card-copy { min-height:0; }
+.home-research-text-card:hover { border-color:var(--accent); }
+.field-area-links li { padding:0; overflow:hidden; }
+.field-area-links a { display:block; padding:4px 12px; text-decoration:none; color:inherit !important; }
+.field-area-links a:hover { color:#efb27e !important; text-decoration:underline; }
+
+</style>
+
+<style id="metpettec-visual-redesign">
+:root {
+  --paper:#0b1722 !important;
+  --surface:#122332 !important;
+  --ink:#edf2f3 !important;
+  --muted:#a9bac4 !important;
+  --rule:rgba(173,195,204,.22) !important;
+  --accent:#e0a16d !important;
+  --kyanite:#7db6ca !important;
+  --tint:rgba(125,182,202,.12) !important;
+  --melt:#e58b67 !important;
+  --melt-tint:rgba(229,139,103,.13) !important;
+  --hero-accent:#e0a16d !important;
+  --hero-shade:7,20,31 !important;
+  color-scheme:dark;
+}
+html,body { background:#0b1722 !important; color:#edf2f3 !important; }
+body {
+  background:
+    radial-gradient(ellipse at 14% 7%,rgba(44,94,115,.25),transparent 32%),
+    radial-gradient(ellipse at 88% 38%,rgba(159,100,63,.10),transparent 30%),
+    linear-gradient(145deg,#0a1722 0%,#102432 52%,#0b1823 100%) !important;
+}
+.site-header {
+  background:rgba(7,20,31,.94) !important;
+  border-bottom:1px solid rgba(210,177,143,.25) !important;
+  backdrop-filter:blur(14px);
+}
+.brand,.brand-name { color:#f5eee6 !important; }
+.brand-sub { color:#bdcbd0 !important; }
+.brand-logo { object-fit:contain; background:#fff; }
+.nav a { color:#d4e0e4 !important; }
+.nav a:hover,.nav a[aria-current="page"] { color:#f0b17f !important; background:rgba(224,161,109,.10) !important; }
+.menu-btn { color:#f3eee7 !important; border-color:#78909a !important; }
+main.wrap { max-width:1320px !important; }
+.hero-band {
+  min-height:660px !important;
+  background:#102b3a !important;
+  border:1px solid rgba(220,177,135,.25);
+  border-bottom:4px solid #d99a67;
+  border-radius:0 0 18px 18px;
+  overflow:hidden;
+}
+.hero-panorama { opacity:.82 !important; filter:saturate(.78) contrast(1.12) !important; }
+.hero-band:after {
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(5,18,28,.94) 0%,rgba(5,18,28,.78) 43%,rgba(5,18,28,.18) 100%),
+             linear-gradient(0deg,rgba(5,18,28,.66),transparent 52%);
+}
+.hero-shade { z-index:1 !important;background:transparent !important; }
+.hero-content { z-index:2 !important;display:flex !important;align-items:center !important;min-height:660px !important;padding-top:76px !important;padding-bottom:76px !important; }
+.hero-text { max-width:760px !important;position:relative !important;z-index:4 !important; }
+.hero-band h1 {
+  display:block !important;visibility:visible !important;opacity:1 !important;
+  color:#fffaf3 !important;font-size:clamp(46px,6vw,78px) !important;
+  line-height:1.02 !important;letter-spacing:-.035em !important;
+  text-shadow:0 4px 28px rgba(0,0,0,.6) !important;margin:14px 0 18px !important;
+}
+.hero-band .lede { color:#f0b17f !important;font-size:clamp(22px,2.3vw,31px) !important;font-style:italic !important; }
+.hero-band .intro { color:#e2eaec !important;font-size:18px !important;max-width:62ch !important; }
+.hero-band .affil { border-bottom-color:rgba(255,255,255,.28) !important; }
+.hero-band .affil-dept { color:#dce7e9 !important; }
+.hero-band .affil-uni { color:#fffaf3 !important; }
+.hero-visuals { z-index:3 !important;opacity:.96 !important; }
+.visual-card { border-color:rgba(238,199,161,.55) !important;background:rgba(8,26,37,.82) !important;box-shadow:0 12px 30px rgba(0,0,0,.25); }
+.visual-kicker { color:#f2c194 !important; }
+.hero-band .btn.primary { background:#a96743 !important;border-color:#d99a67 !important;color:#fff !important; }
+.hero-band .btn:not(.primary) { border-color:rgba(244,230,207,.65) !important;color:#f7eee4 !important; }
+section + section,.hero-band + section { margin-top:54px !important; }
+.section-title h2,.page-head h2 { color:#f1e8dc !important; }
+.section-title a { color:#e5a879 !important; }
+.label { color:#9fb3bc !important; }
+.legend li { border-top-color:rgba(173,195,204,.25) !important; }
+.legend h3 { color:#f0c092 !important; }
+.legend p,.page-head p,.bio p { color:#c4d0d4 !important; }
+.pt-figure,.panel,.scholar,.tile .ph,.pi-card {
+  background:linear-gradient(145deg,#142b3a,#102331) !important;
+  border:1px solid rgba(173,195,204,.24) !important;
+  color:#eaf0f1 !important;
+  box-shadow:0 14px 34px rgba(0,0,0,.22) !important;
+}
+.pt-figure figcaption,.contact dt,.meta,.scholar-role { color:#aebfc6 !important; }
+.panel.callout { border-left:4px solid #d99a67 !important; }
+.page-head { border-color:rgba(173,195,204,.25) !important; }
+.btn { border-color:rgba(205,220,224,.35) !important;color:#edf2f3 !important; }
+.btn.primary { background:#a96743 !important;border-color:#d99a67 !important; }
+a { color:#efb27e !important; }
+a:hover { color:#ffd0a6 !important; }
+.news li,.projects li,.pub { border-color:rgba(173,195,204,.23) !important; }
+.news p,.projects p,.pubs,.confs { color:#d7e1e3 !important; }
+.date,.status { color:#f0b17f !important; }
+.research-visual-grid {
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:10px;
+}
+.research-card {
+  overflow:hidden;border:1px solid rgba(173,195,204,.26);border-radius:15px;
+  background:linear-gradient(145deg,#142b3a,#102331);
+  box-shadow:0 14px 32px rgba(0,0,0,.25);
+  transition:transform .22s ease,box-shadow .22s ease;
+}
+.research-card:hover { transform:translateY(-5px);box-shadow:0 20px 40px rgba(0,0,0,.34); }
+.research-art { background:#0d202d !important;padding:10px; }
+.research-art svg { display:block;width:100%;height:auto;border-radius:9px; }
+.research-card-body { padding:22px 24px 24px; }
+.research-index { display:inline-block;margin-bottom:10px;color:#e5a879 !important;font:700 .78rem var(--font-label);letter-spacing:.16em; }
+.research-card h3 { color:#f3e8db !important;font-size:23px !important;margin:0 0 10px; }
+.research-card p { color:#c6d3d7 !important;font-size:17px !important;line-height:1.58 !important; }
+.research-tags { display:flex;flex-wrap:wrap;gap:7px;margin-top:16px; }
+.research-tags span { border:1px solid rgba(173,195,204,.3);border-radius:99px;padding:4px 10px;color:#c7d5d9;background:rgba(125,182,202,.08);font:600 .78rem var(--font-label);letter-spacing:.04em; }
+.research-card:last-child { grid-column:1/-1;display:grid;grid-template-columns:1.05fr 1fr; }
+.research-card:last-child .research-art { display:flex;align-items:center; }
+.research-card:last-child .research-card-body { align-self:center; }
+[data-view="research"] .grid-2 { padding:26px;background:rgba(125,182,202,.06);border:1px solid rgba(173,195,204,.22);border-radius:14px; }
+[data-view="research"] .chips li { background:#173344 !important;border-color:rgba(173,195,204,.25) !important;color:#d9e5e7 !important; }
+.profile-links a,.institution-logos b { color:#dce8e9 !important; }
+.institution-mark { background:#173344 !important;color:#f1c294 !important;border:1px solid rgba(173,195,204,.25); }
+.logo-note { color:#9fb2ba !important; }
+.gallery .ph { background:#142b3a !important; }
+@media(max-width:850px) {
+ .hero-band,.hero-content { min-height:600px !important; }
+ .hero-content { align-items:flex-start !important; }
+ .hero-visuals { opacity:.28 !important; }
+ .research-visual-grid { grid-template-columns:1fr; }
+ .research-card:last-child { grid-column:auto;display:block; }
+}
+@media(max-width:560px) {
+ .hero-band,.hero-content { min-height:0 !important; }
+ .hero-content { padding-top:76px !important;padding-bottom:76px !important; }
+ .hero-band h1 { font-size:43px !important; }
+ .hero-visuals { display:none !important; }
+ .research-card-body { padding:18px !important; }
+}
+@media(prefers-reduced-motion:reduce) { .research-card { transition:none; } .research-card:hover { transform:none; } }
+</style>
+
+
+<style id="homepage-user-photographs">
+/* Homepage photographs supplied for this update */
+.reference-hero {
+  grid-template-columns:minmax(0,1.18fr) minmax(260px,.72fr) !important;
+  gap:clamp(24px,4vw,64px) !important;
+  min-height:430px !important;
+  padding:clamp(28px,4vw,52px) !important;
+}
+.hero-mountain-art {
+  background:
+    linear-gradient(90deg,rgba(4,17,26,.91) 0%,rgba(4,17,26,.72) 48%,rgba(4,17,26,.22) 100%),
+    linear-gradient(0deg,rgba(4,17,26,.42),rgba(4,17,26,.08)),
+    url("assets/images/department-applied-geology.jpg") center 48% / cover no-repeat !important;
+}
+.hero-darken { background:transparent !important; }
+.reference-hero-copy { max-width:720px !important; }
+.hero-science-collage.hero-portrait {
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  transform:none !important;
+  min-width:0;
+  padding:12px;
+  background:rgba(7,23,34,.35);
+  border:1px solid rgba(238,199,161,.52);
+  border-radius:14px;
+  box-shadow:0 16px 38px rgba(0,0,0,.32);
+}
+.hero-portrait img {
+  display:block;
+  width:min(100%,350px);
+  max-height:390px;
+  height:auto;
+  object-fit:contain;
+  object-position:center;
+  border-radius:8px;
+  background:#fff;
+  box-shadow:0 8px 22px rgba(0,0,0,.28);
+}
+.brand-mountain { display:none !important; }
+.home-dashboard { grid-template-columns:minmax(210px,.78fr) minmax(0,2.9fr) !important; }
+.home-research { min-width:0; }
+.home-research-grid {
+  grid-template-columns:repeat(6,minmax(0,1fr)) !important;
+  gap:14px !important;
+}
+.home-research-card { grid-column:span 2 !important; min-width:0; }
+.home-research-card:nth-child(4), .home-research-card:nth-child(5) { grid-column:span 3 !important; }
+.home-research-card > img {
+  display:block;
+  width:100%;
+  height:165px;
+  object-fit:cover;
+  object-position:center;
+  background:#102633;
+}
+.home-research-card:nth-child(2) > img { object-fit:contain; padding:8px; }
+.home-research-card:nth-child(3) > img { object-fit:contain; padding:8px; }
+.home-research-card:nth-child(4) > img { object-fit:contain; padding:8px; }
+.home-research-card:nth-child(5) > img { object-position:center 48%; }
+.home-card-copy { min-height:100px; }
+@media(max-width:900px) {
+  .reference-hero { grid-template-columns:minmax(0,1fr) minmax(220px,.7fr) !important; }
+  .home-dashboard { grid-template-columns:1fr !important; }
+}
+@media(max-width:650px) {
+  .reference-hero { grid-template-columns:1fr !important; padding:28px 20px !important; }
+  .hero-portrait { max-width:280px; justify-self:center; }
+  .hero-portrait img { max-height:300px; }
+  .home-research-grid { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+  .home-research-card, .home-research-card:nth-child(4), .home-research-card:nth-child(5) { grid-column:span 1 !important; }
+  .home-research-card > img { height:145px; }
+}
+</style>
+
+
+<style id="homepage-layout-and-type-refinement">
+/* Homepage lower dashboard: use the full available width and eliminate the empty lower-right area. */
+.home-dashboard {
+  display:grid !important;
+  grid-template-columns:minmax(220px,.78fr) minmax(0,2.22fr) !important;
+  grid-template-areas:"profile research" "bottom bottom" !important;
+  align-items:start !important;
+  column-gap:28px !important;
+  row-gap:30px !important;
+}
+.home-profile { grid-area:profile !important; }
+.home-research { grid-area:research !important; min-width:0; }
+.home-right-column {
+  grid-area:bottom !important;
+  display:grid !important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+  align-items:start !important;
+  gap:24px !important;
+  width:100% !important;
+  min-width:0;
+}
+.home-pt-card, .home-news-card { min-width:0; height:100%; }
+.home-pt-card canvas { max-height:360px; object-fit:contain; }
+.home-news-card { padding:20px 22px !important; }
+.home-news-card .home-news-list li { padding-top:12px !important; padding-bottom:12px !important; }
+
+/* Remove the decorative gold frame/box around the portrait; retain the photograph itself. */
+.hero-science-collage.hero-portrait {
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  padding:0 !important;
+  border-radius:0 !important;
+}
+.hero-portrait img {
+  border:0 !important;
+  box-shadow:none !important;
+  border-radius:4px !important;
+}
+
+/* Improve readability across the site without changing the approved hero name and role sizes. */
+body { font-size:18px !important; }
+main.wrap { font-size:18px; }
+.page-head > p:not(.label), .page-head p:not(.label),
+.bio p, .theme p, .theme .refs, .inst span,
+.pub .authors, .pub .venue, .pub .doi-line,
+.confs li, .projects li, .proj-meta,
+.timeline .what span, .diss li span,
+.scholar-topic p, .scholar-role,
+.gallery .tile figcaption, .tile figcaption,
+.home-profile > p:not(.dashboard-eyebrow),
+.profile-link-list a, .profile-link-list span,
+.home-card-copy p, .home-news-list p,
+.home-news-list time, .home-pt-card figcaption,
+.contact, dl.contact, footer, .foot {
+  font-size:16px !important;
+  line-height:1.55 !important;
+}
+.dashboard-eyebrow, .label, .hero-overline,
+.reference-nav a, .reference-nav .nav-secondary a,
+.university-lockup b, .university-lockup small,
+.hero-actions a, .home-news-list time {
+  font-size:15px !important;
+}
+.home-profile h2 { font-size:26px !important; }
+.dashboard-heading h2 { font-size:28px !important; }
+.home-card-copy h3 { font-size:20px !important; }
+.home-card-copy p { font-size:16px !important; }
+.home-news-card .dashboard-heading h2 { font-size:26px !important; }
+
+@media(max-width:900px) {
+  .home-dashboard {
+    grid-template-columns:minmax(0,1fr) !important;
+    grid-template-areas:"profile" "research" "bottom" !important;
+  }
+  .home-right-column {
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+  }
+}
+@media(max-width:650px) {
+  .home-right-column { grid-template-columns:1fr !important; }
+  body, main.wrap { font-size:17px !important; }
+  .home-card-copy h3 { font-size:19px !important; }
+  .home-card-copy p, .home-news-list p, .home-profile > p:not(.dashboard-eyebrow),
+  .profile-link-list a, .profile-link-list span, .home-pt-card figcaption,
+  .home-news-list time { font-size:15px !important; }
+}
+</style>
+
+
+<style id="homepage-and-group-refinements-v5">
+/* Six research-interest cards in a balanced three-column layout. */
+.home-research-grid {
+  display:grid !important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:18px !important;
+  align-items:stretch;
+}
+.home-research-card,
+.home-research-card:nth-child(4),
+.home-research-card:nth-child(5) {
+  grid-column:span 1 !important;
+  min-width:0;
+  height:100%;
+}
+.home-research-card > img {
+  height:175px !important;
+  object-fit:cover !important;
+  object-position:center;
+}
+.home-card-copy { flex:1; }
+.home-research-card .home-card-copy p { font-size:16px !important; line-height:1.55 !important; }
+.home-profile > p:not(.dashboard-eyebrow) {
+  font-size:18px !important;
+  line-height:1.7 !important;
+}
+.profile-link-list {
+  gap:12px !important;
+  margin-top:22px !important;
+}
+.profile-link-list a, .profile-link-list span {
+  font-size:17px !important;
+  line-height:1.5 !important;
+  padding:9px 12px !important;
+  display:inline-flex;
+  align-items:center;
+}
+.scholar-photo {
+  width:160px !important;
+  height:190px !important;
+  object-fit:cover !important;
+  object-position:center 25% !important;
+}
+.scholar-email {
+  margin:0;
+  font-size:14px;
+  line-height:1.45;
+  overflow-wrap:anywhere;
+}
+.scholar-email a {
+  color:var(--accent);
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+.scholar .meta {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+}
+@media (max-width:900px) {
+  .home-research-grid { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+}
+@media (max-width:600px) {
+  .home-research-grid { grid-template-columns:1fr !important; }
+  .home-research-card > img { height:190px !important; }
+  .home-profile > p:not(.dashboard-eyebrow) { font-size:17px !important; }
+  .profile-link-list a, .profile-link-list span { font-size:16px !important; }
+}
+</style>
+
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+  </defs>
+</svg>
+
+<header class="site-header reference-header">
+<div class="header-inner reference-header-inner">
+<a class="brand reference-brand" href="#home" aria-label="MetPetTec Lab home">
+<span class="brand-text"><span class="brand-name">MetPetTec <em>Lab</em></span><span class="brand-sub">Metamorphic Petrology and Tectonics Laboratory</span></span></a>
+<div class="university-lockup"><span><b>DEPARTMENT OF APPLIED GEOLOGY</b><small>Dibrugarh University, Assam, India</small></span><img class="brand-logo" src="assets/images/department-applied-geology.jpg" alt="Department of Applied Geology building, Dibrugarh University" width="240" height="240"></div>
+<button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="site-nav">Menu</button>
+<nav class="nav reference-nav" id="site-nav" aria-label="Main">
+<div class="nav-main"><a href="#home">Home</a><a href="#about">About</a><a href="#research">Research</a><a href="#group">Group</a><a href="#publications">Publications</a><a href="#gallery">Gallery</a><a href="#contact">Contact</a></div>
+<div class="nav-secondary"><a href="#prospective">Prospective Doctoral and Postdoctoral Researchers</a><span>|</span></div></nav></div></header>
+
+<main class="wrap">
+
+<!-- HOME -->
+<div class="view" data-view="home">
+<section class="reference-hero" id="hero-band">
+<div class="hero-mountain-art" aria-hidden="true"></div><div class="hero-darken"></div>
+<div class="reference-hero-copy"><p class="hero-overline">DEPARTMENT OF APPLIED GEOLOGY · DIBRUGARH UNIVERSITY</p><h1>Dr. Purbajyoti Phukon</h1><p class="hero-role">Metamorphic Petrologist</p><div class="hero-rule"></div><p class="hero-credentials">Assistant Professor <span>│</span> Fulbright Fellow</p><p class="hero-affiliation">Department of Applied Geology<br>Dibrugarh University, Assam, India</p><div class="hero-actions"><a href="#research">Explore Research</a><a href="#about">About the Researcher</a></div></div>
+<div class="hero-science-collage hero-portrait" aria-label="Portrait of Dr. Purbajyoti Phukon"><img src="assets/images/purbajyoti-phukon.jpg" alt="Dr. Purbajyoti Phukon, Assistant Professor, Department of Applied Geology, Dibrugarh University"></div></section>
+
+<section class="home-dashboard">
+<aside class="home-profile"><p class="dashboard-eyebrow">Researcher</p><h2>Dr. Purbajyoti Phukon</h2><p>Dr. Purbajyoti Phukon is an Assistant Professor in the Department of Applied Geology at Dibrugarh University, Assam, India, and a Fulbright Fellow. His research focuses on metamorphic petrology, petrochronology and continental tectonics, particularly the thermal–tectonic evolution and deep-crustal processes of the Himalaya and high-grade Precambrian crystalline terrains.</p>
+<div class="profile-link-list"><a href="https://scholar.google.com/citations?user=vQPaCTkAAAAJ&amp;hl=en" target="_blank" rel="noopener"><b>GS</b> Google Scholar</a><a href="https://www.researchgate.net/profile/Purbajyoti-Phukon" target="_blank" rel="noopener"><b>RG</b> ResearchGate</a><a href="https://www.dibru.ac.in/user-profile/purbajyoti-phukon" target="_blank" rel="noopener"><b>DU</b> University Profile</a><span><b>iD</b> ORCID · link to be added</span></div></aside>
+
+<section class="home-research"><div class="dashboard-heading"><span class="heading-mark">⌁</span><h2>Research Interests</h2><i></i></div><div class="home-research-grid">
+<a class="home-research-card" href="#research">
+<img src="assets/images/crustal-melting-migmatite.jpg" alt="Migmatitic banding and high-grade crustal melting in the field">
+<div class="home-card-copy"><h3>Crustal Melting</h3><p>Partial melting, melt generation, segregation and migration in the continental crust.</p></div></a>
+<a class="home-research-card" href="#research">
+<img src="assets/images/petrochronology-zircon-concordia.jpg" alt="Zircon U–Pb concordia data and petrochronological constraints">
+<div class="home-card-copy"><h3>Petrochronology</h3><p>Mineral chemistry and geochronology to constrain metamorphic and magmatic histories.</p></div></a>
+<a class="home-research-card" href="#research">
+<img src="assets/images/deformation-exhumation-microstructure.jpg" alt="Mineral microstructural and compositional map relevant to deformation studies">
+<div class="home-card-copy"><h3>Deformation Microstructure</h3><p>Deformation mechanisms and tectonic controls on crustal exhumation.</p></div></a>
+<a class="home-research-card" href="#research">
+<img src="assets/images/metamorphic-co2-flux.jpg" alt="Schematic illustration of metamorphic carbon dioxide release in the Himalaya">
+<div class="home-card-copy"><h3>Metamorphic CO₂ Flux</h3><p>Carbon transfer, metamorphic decarbonation and geological CO₂ release in mountain belts.</p></div></a>
+<a class="home-research-card" href="#research">
+<img src="assets/images/critical-metals-outcrop.jpg" alt="Field exposure of a geological unit investigated for critical-metal mineralization">
+<div class="home-card-copy"><h3>Critical Metals and Mineralization</h3><p>Geological and mineralogical controls on critical-metal enrichment in geological systems.</p></div></a>
+<a class="home-research-card" href="#research">
+<img src="assets/images/geological-mapping-fieldwork.jpg" alt="Geological mapping field exercise with students examining an exposed rock outcrop">
+<div class="home-card-copy"><h3>Geological Mapping</h3><p>Geological and structural mapping to document lithological relationships, deformation structures and regional tectonic architecture.</p></div></a>
+</div></section>
+
+<aside class="home-right-column"><figure class="home-pt-card"><canvas id="pt" width="600" height="480" role="img" aria-label="Schematic pressure–temperature path for a Himalayan metamorphic terrain"></canvas><figcaption>Simplified P–T path of the migmatites from Greater Himalayan Sequence constrained by metamorphic modeling</figcaption></figure>
+<section class="home-news-card"><div class="dashboard-heading"><span class="heading-mark">▤</span><h2>Latest News</h2><i></i></div><ul class="home-news-list">
+<li><time>July 2026</time><p>Talk at Goldschmidt 2026: “Unlocking Hidden Carbon: Metamorphic Degassing in the Eastern Himalaya”.</p></li>
+<li><time>2026</time><p>Joined the Department of Applied Geology, Dibrugarh University as Assistant Professor.</p></li>
+<li><time>April 2026</time><p>Invited talk in the M-cube lecture series: “Tracking Thrust Activity Through Petrochronology: Examples from the Himalaya”.</p></li>
+</ul></section></aside></section></div>
+
+<!-- ABOUT -->
+<div class="view" data-view="about">
+  <div class="page-head">
+    <p class="label">About</p>
+    <h2>Dr. Purbajyoti Phukon</h2>
+    <p>Assistant Professor · Fulbright Fellow · Department of Applied Geology, Dibrugarh University</p>
+  </div>
+  <div class="two-col">
+    <div class="stack">
+      <section class="stack bio" style="margin-top:0">
+        <p>Dr. Purbajyoti Phukon is a geologist specializing in metamorphic petrology, petrochronology, and tectonic processes operating in convergent continental settings. His research focuses on understanding the evolution of the continental crust through investigations of metamorphic and magmatic processes, crustal melting, deformation, and exhumation.</p>
+        <p>His research experience encompasses the Himalayan orogenic belt and high-grade Precambrian crystalline terrains. He employs an integrated approach that combines field geology, petrography, mineral chemistry, microstructural analysis, trace-element geochemistry of minerals, phase-equilibrium modeling, and monazite, zircon, and titanite U–Pb geochronology to investigate the temporal and petrological evolution of crustal processes. His broader research interests also include metamorphic CO₂ fluxes and critical metal enrichment.</p>
+      </section>
+
+      <section>
+        <h3 class="label" style="margin-bottom:8px">Career</h3>
+        <ul class="timeline">
+          <li><span class="when">2026–present</span><span class="what"><b>Assistant Professor</b><span>Department of Applied Geology, Dibrugarh University</span></span></li>
+          <li><span class="when">2024–2025</span><span class="what"><b>Fulbright-Nehru Postdoctoral Research Fellow</b><span>Department of Earth Science, University of California, Santa Barbara, USA</span></span></li>
+          <li><span class="when">2019–2026</span><span class="what"><b>Assistant Professor</b><span>Department of Earth Science, Assam University, Silchar</span></span></li>
+        </ul>
+      </section>
+
+      <section>
+        <h3 class="label" style="margin-bottom:8px">Education</h3>
+        <ul class="timeline">
+          <li><span class="when">Postdoc</span><span class="what"><b>Metamorphic Petrology and Geochronology</b><span>University of California, Santa Barbara, USA</span></span></li>
+          <li><span class="when">PhD</span><span class="what"><b>Geology</b><span>Wadia Institute of Himalayan Geology, Dehradun, and Banaras Hindu University, Varanasi</span></span></li>
+          <li><span class="when">M.Sc.</span><span class="what"><b>Applied Geology</b><span>Dibrugarh University</span></span></li>
+          <li><span class="when">B.Sc.</span><span class="what"><b>Geology</b><span>Sibsagar College, Joysagar</span></span></li>
+        </ul>
+      </section>
+
+      <section>
+        <h3 class="label" style="margin-bottom:8px">Honours and awards</h3>
+        <ul class="timeline">
+          <li><span class="when">2026</span><span class="what"><b>Early Career Grant, Goldschmidt 2026</b><span>Geochemical Society and European Association of Geochemistry</span></span></li>
+          <li><span class="when">2026</span><span class="what"><b>International Travel Support grant</b><span>Anusandhan National Research Foundation (ANRF), for Goldschmidt 2026</span></span></li>
+          <li><span class="when">2024</span><span class="what"><b>Fulbright-Nehru Postdoctoral Research Fellowship</b><span>United States–India Educational Foundation (USIEF)</span></span></li>
+          <li><span class="when">2023</span><span class="what"><b>Invited participant, Indo–German Week of Young Researchers</b><span>ANRF and Deutsche Forschungsgemeinschaft (DFG)</span></span></li>
+          <li><span class="when">2019</span><span class="what"><b>International Travel Support grant</b><span>ANRF (formerly SERB)</span></span></li>
+          <li><span class="when">2018</span><span class="what"><b>Best Paper Award</b><span>Wadia Institute of Himalayan Geology, Dehradun, for Phukon et al. (2018), <i>GSA Bulletin</i> 130, 1164–1176</span></span></li>
+          <li><span class="when">2017</span><span class="what"><b>Early Career Grant, Goldschmidt 2017</b><span>Geochemical Society and European Association of Geochemistry</span></span></li>
+        </ul>
+      </section>
+
+      <div class="grid-2">
+        <section style="margin-top:0">
+          <h3 class="label" style="margin-bottom:8px">Professional memberships</h3>
+          <ul class="plain">
+            <li>Structural Geology and Tectonic Studies Group of India (SGTSGI) <span>since 2023</span></li>
+            <li>International Association for Structural Geology and Tectonics (IASGT) <span>since 2023</span></li>
+            <li>Metamorphic Studies Group <span>since 2022</span></li>
+            <li>European Geosciences Union (EGU) <span>since 2019</span></li>
+          </ul>
+        </section>
+        <section style="margin-top:0">
+          <h3 class="label" style="margin-bottom:8px">Service</h3>
+          <ul class="plain">
+            <li>Member, Research Program and Policy Development Committee, Assam University <span>2022–</span></li>
+            <li>Member, Research Advisory Committee, Department of Earth Science, Assam University <span>2020–2026</span></li>
+            <li>Member, Board of Post-Graduate Studies, School of Earth Sciences, Assam University <span>2019–2026</span></li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESEARCH -->
+<div class="view" data-view="research">
+  <div class="page-head research-head">
+    <div class="stack">
+      <p class="label">Ongoing Research</p>
+      <h2>Ongoing Research</h2>
+  <p>Current research integrates field geology, petrology, geochemistry, thermodynamic modelling, microstructural analysis, and geochronology to investigate crustal processes in the Himalaya and Precambrian terrains of Northeast India.</p>
+    </div>
+  </div>
+
+  <p class="research-figure-note">Illustrated research themes: original conceptual schematics are used to explain the geological processes, analytical approaches and research questions addressed by the laboratory. They are not intended to replace sample-specific data figures.</p>
+  <section class="research-visual-grid" aria-label="Research themes">
+    <article class="research-card research-melting">
+      <div class="research-card-body">
+        <span class="research-index">01 / ANATEXIS</span>
+        <h3>Crustal Melting in the Himalayan Metamorphic Core</h3>
+        <p>Quantifying melt generation, segregation and extraction in the Greater Himalayan Sequence, and evaluating melt-loss effects on bulk-rock composition and crustal rheology.</p>
+        <div class="research-tags"><span>Migmatites</span><span>Phase equilibria</span><span>Melt connectivity</span></div>
+      </div>
+    </article>
+
+    <article class="research-card research-deformation">
+      <div class="research-card-body">
+        <span class="research-index">02 / TECTONICS</span>
+        <h3>Deformation, Microstructures and Crustal Exhumation</h3>
+        <p>Linking meso- and micro-scale deformation, recrystallization mechanisms and rheological changes with the exhumation of rocks in collisional orogens.</p>
+        <div class="research-tags"><span>Microstructures</span><span>EBSD</span><span>Shear zones</span></div>
+      </div>
+    </article>
+
+    <article class="research-card research-petrochron">
+      <div class="research-card-body">
+        <span class="research-index">03 / TIME</span>
+        <h3>Petrochronology of the Assam–Meghalaya Gneissic Complex</h3>
+        <p>Combining field relationships, mineral chemistry, phase equilibria, zircon–monazite U–Pb geochronology and isotopic studies to investigate crustal growth and reworking.</p>
+        <div class="research-tags"><span>Zircon</span><span>Monazite</span><span>U–Pb geochronology</span></div>
+      </div>
+    </article>
+
+    <article class="research-card research-carbon">
+      <div class="research-card-body">
+        <span class="research-index">04 / DEEP CARBON</span>
+        <h3>Metamorphic CO₂ Degassing and Geological Carbon Cycling</h3>
+        <p>Investigating CO₂ generation by metamorphic decarbonation in carbonate-bearing and calc-silicate rocks, including the influence of fluid–rock interaction and deformation-assisted transport.</p>
+        <div class="research-tags"><span>Decarbonation</span><span>Calc-silicates</span><span>Fluid pathways</span></div>
+      </div>
+    </article>
+
+    <article class="research-card research-metals">
+      <div class="research-card-body">
+        <span class="research-index">05 / RESOURCE GEOLOGY</span>
+        <h3>Critical Metal Fertility of Himalayan, Trans-Himalayan and Karbi Hills Granites</h3>
+        <p>Evaluating geological, geochemical and crystal-chemical controls on metal enrichment, magmatic differentiation and the development of critical metal-bearing mineral assemblages.</p>
+        <div class="research-tags"><span>Granites</span><span>Trace elements</span><span>Critical metals</span></div>
+      </div>
+    </article>
+    <article class="research-card research-mapping">
+      <div class="research-card-body">
+        <span class="research-index">06 / FIELD GEOLOGY</span>
+        <h3>Geological and Structural Mapping</h3>
+        <p>Field-based geological and structural mapping to establish lithological relationships, document deformation features and interpret the tectonic architecture of Himalayan and Precambrian terrains.</p>
+        <div class="research-tags"><span>Geological mapping</span><span>Structural geology</span><span>Field relationships</span></div>
+      </div>
+    </article>
+  </section>
+
+  <section class="grid-2">
+    <div>
+      <h3 class="label" style="margin-bottom:12px">Methods</h3>
+      <ul class="chips">
+        <li>Geological and Structural Mapping</li><li>Petrography and Microtextures</li><li>Microstructures &amp; EBSD</li>
+        <li>Mineral Chemistry (Major and trace elements)</li><li>Phase equilibrium modelling</li><li>Zircon, monazite and titanite petrochronology</li>
+        <li>Whole-rock geochemistry</li><li>Isotope Geochemistry</li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="label" style="margin-bottom:12px">Field areas</h3>
+      <ul class="chips field-area-links">
+        <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Kumaun+Himalaya%2C+Uttarakhand%2C+India" target="_blank" rel="noopener">Kumaun Himalaya</a></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Garhwal+Himalaya%2C+Uttarakhand%2C+India" target="_blank" rel="noopener">Garhwal Himalaya</a></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Arunachal+Himalaya%2C+India" target="_blank" rel="noopener">Arunachal Himalaya</a></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Assam+Meghalaya+Gneissic+Complex%2C+Northeast+India" target="_blank" rel="noopener">Assam–Meghalaya Gneissic Complex</a></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Mikir+Hills%2C+Karbi+Anglong%2C+Assam%2C+India" target="_blank" rel="noopener">Mikir Hills</a></li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<!-- PUBLICATIONS -->
+<div class="view" data-view="publications">
+  <div class="page-head">
+    <p class="label">Publications</p>
+    <h2>Journal articles</h2>
+    <p>For citation counts and the latest list, see <a href="https://scholar.google.com/citations?user=vQPaCTkAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a> and <a href="https://www.researchgate.net/profile/Purbajyoti-Phukon" target="_blank" rel="noopener">ResearchGate</a>. * marks the corresponding author.</p>
+  </div>
+  <div class="pub-tools">
+    <label for="pub-search" class="label" style="position:absolute;left:-9999px">Search publications</label>
+    <input id="pub-search" type="search" placeholder="Search by title, author or journal">
+    <div class="seg" role="group" aria-label="Filter publications">
+      <button type="button" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" data-filter="first" aria-pressed="false">First author</button>
+      <button type="button" data-filter="corr" aria-pressed="false">Corresponding</button>
+    </div>
+  </div>
+  <p class="pub-count" id="pub-count" aria-live="polite"></p>
+  <div id="pub-list"></div>
+
+  <section>
+    <div class="section-title"><h2>Conference presentations</h2></div>
+    <ul class="confs">
+      <li>Phukon, P. &amp; Cottle, J. Unlocking Hidden Carbon: Metamorphic Degassing in the Eastern Himalaya.<span>Goldschmidt 2026, EAG and Geochemical Society, July 2026</span></li>
+      <li>Phukon, P. Melt loss in anatectic systems and its influence on protolith composition: insights from phase equilibrium modelling of migmatites.<span>Frontiers in Geosciences Research Conference, Physical Research Laboratory, Ahmedabad, February 2023</span></li>
+      <li>Phukon, P. &amp; Sen, K. Crustal anatexis of the Greater Himalayan Crystalline Sequence and its tectonic implications: insights from structural, metamorphic and chronological studies along the Kali River valley, Kumaun Himalaya.<span>EGU General Assembly, Vienna, April 2019</span></li>
+      <li>Phukon, P., Sen, K. &amp; Srivastava, H.B. Integrated field, microstructural, metamorphic and geochronological approach to define the Himalayan Main Central Thrust: an example from the Kali River valley, Kumaun Himalaya.<span>5th Conference and Workshop on Rock Deformation and Structures, University of Delhi, October 2018</span></li>
+      <li>Phukon, P., Sen, K., Srivastava, H.B., Singhal, S. &amp; Sen, A. Paleoproterozoic active volcanic arc setting of the north Indian continental margin: insights from U–Pb ages and bulk rock geochemistry from Kumaun Himalaya.<span>Goldschmidt 2017, Paris, August 2017</span></li>
+      <li>Phukon, P. &amp; Sen, A. Lesser Himalayan affinity of Chiplakot Klippe, Kumaun Himalaya, India: constrained from zircon U–Pb geochronology and geochemistry.<span>National Geoscholar Meet, WIHG, Dehradun, May 2017</span></li>
+      <li>Gogoi, M.P., Phukon, P., Kalita, P., Baruah, S. &amp; Goswami, T.K. Sheared biotite gneiss around Daporijo, Upper Subansiri District, Arunachal Pradesh: evidence for transposition of early shear-related folds.<span>Rock Deformation and Structures, Dibrugarh University, October 2014</span></li>
+    </ul>
+  </section>
+</div>
+
+<!-- GROUP -->
+<div class="view" data-view="group">
+  <div class="page-head">
+    <p class="label">Group</p>
+    <h2>Research Group: MetPetTec Lab</h2>
+    <p>MetPetTec Lab, led by Dr. Purbajyoti Phukon at the Department of Applied Geology, Dibrugarh University, focuses on understanding the evolution of continental crust through the interplay of metamorphic, magmatic, tectonic, and geochemical processes operating through geological time.</p>
+    <p>The overarching objective of the laboratory is to unravel the processes governing crustal melting, mineral growth, deformation, exhumation, and fluid–rock interaction, and to explore their implications for geological carbon cycling and critical metal enrichment. Through integrated field-based, petrological, geochemical, thermodynamic, and geochronological investigations, the laboratory seeks to address fundamental questions in Earth Sciences, with particular emphasis on the Himalayan orogen and Precambrian crystalline terrains of Northeast India.</p>
+  </div>
+  <section style="margin-top:0">
+    <h3 class="label" style="margin-bottom:14px">Group Leader</h3>
+    <div class="pi-card">
+      <div class="stack">
+        <div>
+          <h3 style="font-size:var(--step-2)">Dr. Purbajyoti Phukon</h3>
+          <p style="color:var(--muted)">Assistant Professor, Department of Applied Geology</p>
+        </div>
+        <p class="justify">Metamorphic petrologist working on crustal melting, petrochronology and the tectonic evolution of the Himalaya. Former Fulbright-Nehru Postdoctoral Research Fellow at UC Santa Barbara.</p>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="section-title"><h2>Current group members</h2><span class="label">Doctoral researchers</span></div>
+    <ul class="scholars">
+      <li class="scholar">
+        <img class="scholar-photo" src="assets/hussain.jpg" alt="Md. Sunny Hussain" width="480" height="600" loading="lazy">
+        <div class="scholar-body">
+          <div><h4 class="scholar-name">Md. Sunny Hussain</h4><p class="scholar-role">PhD Scholar</p></div>
+          <div class="scholar-topic"><span class="label">Thesis topic</span><p>“Tectono-metamorphic evolution of Arunachal Himalaya, NE India”</p></div>
+          <p class="meta"><span class="label">Status</span> <span class="status ongoing">Thesis Submitted</span></p>
+        </div>
+      </li>
+      <li class="scholar">
+        <img class="scholar-photo" src="assets/images/himangshu-saikia.jpg" alt="Himangshu Saikia" width="480" height="600" loading="lazy">
+        <div class="scholar-body">
+          <div><h4 class="scholar-name">Himangshu Saikia</h4><p class="scholar-role">PhD Scholar</p></div>
+          <div class="scholar-topic"><span class="label">Thesis topic</span><p>“Petrochronological studies on migmatites from Arunachal Himalaya, NE India”</p></div>
+          <p class="scholar-email"><a href="mailto:masterhimangshupriyamsaikia@gmail.com">masterhimangshupriyamsaikia@gmail.com</a></p>
+          <p class="meta"><span class="label">Status</span> <span class="status ongoing">In progress</span></p>
+        </div>
+      </li>
+      <li class="scholar">
+        <img class="scholar-photo" src="assets/images/rajashree-gogoi.png" alt="Rajashree Gogoi" width="480" height="600" loading="lazy">
+        <div class="scholar-body">
+          <div><h4 class="scholar-name">Rajashree Gogoi</h4><p class="scholar-role">PhD Scholar</p></div>
+          <div class="scholar-topic"><span class="label">Thesis topic</span><p>“Magmatic and Metamorphic Evolution of the Assam-Meghalaya Gneissic Complex, NE India”</p></div>
+          <p class="scholar-email"><a href="mailto:rajashreegogoi99@gmail.com">rajashreegogoi99@gmail.com</a></p>
+          <p class="meta"><span class="label">Status</span> <span class="status ongoing">In progress</span></p>
+        </div>
+      </li>
+      <li class="scholar">
+        <img class="scholar-photo" src="assets/images/ananya-baruah.jpg" alt="Ananya Baruah" width="480" height="600" loading="lazy">
+        <div class="scholar-body">
+          <div><h4 class="scholar-name">Ananya Baruah</h4><p class="scholar-role">PhD Scholar</p></div>
+          <div class="scholar-topic"><span class="label">Thesis topic</span><p>“Mineralization in Granite”</p></div>
+          <p class="scholar-email"><a href="mailto:rs_ananyabaruah@dibru.ac.in">rs_ananyabaruah@dibru.ac.in</a></p>
+          <p class="meta"><span class="label">Status</span> <span class="status ongoing">In progress</span></p>
+        </div>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <div class="section-title"><h2>Past Group Members</h2><span class="label">M.Sc. dissertation researchers</span></div>
+    <ul class="scholars past-scholars">
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Sukanya Gogoi to be supplied"><span>SG</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Sukanya Gogoi</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“Microtextural and metamorphic P–T evolution of the Precambrian basement rocks of Meghalaya, NE India: insights from Nongstoin migmatitic granite gneiss”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Mayurakshi Paul to be supplied"><span>MP</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Mayurakshi Paul</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“Distribution of melt fractions in migmatites across the Zimithang Thrust, Western Arunachal Himalaya, NE India: a study based on the zircon melt-o-meter technique”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Kallul Borgohain to be supplied"><span>KB</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Kallul Borgohain</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“Mesoscopic deformation and microtextures of the Greater Himalayan Sequence, Eastern Arunachal Himalaya, NE India: an integrated study to understand structural and metamorphic evolution”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Navya Sonowal to be supplied"><span>NS</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Navya Sonowal</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“Determination of paleostress and strain in the hanging wall of the Lumla Thrust, Western Arunachal Himalaya, NE India”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Bishal Boruah to be supplied"><span>BB</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Bishal Boruah</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“An integrated petrographic, textural and metamorphic study of the Greater Himalayan Sequence, Western Arunachal Himalaya, NE India”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Protyush Neog to be supplied"><span>PN</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Protyush Neog</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“Characterizing the inverse metamorphic sequence in the Lower Greater Himalayan Sequence, Eastern Arunachal Himalaya, NE India: a microtextural study”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Deepsanu Sharma to be supplied"><span>DS</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Deepsanu Sharma</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“Determination of deformation temperature, differential stress and strain rate in the Bomdila Gneiss, Western Arunachal Himalaya, NE India”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Marian Chorai to be supplied"><span>MC</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Marian Chorai</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“Vorticity analysis across the Bomdila Gneiss along the Bhalukpong–Bomdila–Dirang transect, Western Arunachal Himalaya, NE India”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of N. Mosmi Singha to be supplied"><span>NM</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">N. Mosmi Singha</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“Metamorphism of the Nongstoin Granite Gneiss of West Khasi Hills, Meghalaya, NE India: an integrated textural and geothermobarometric study”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Rajdeep Hore to be supplied"><span>RH</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Rajdeep Hore</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“Crystal size distribution analysis in the Nongpoh granitoids, Meghalaya, NE India: insights into crystal nucleation and growth rate”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Samudrajee Baruah to be supplied"><span>SB</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Samudrajee Baruah</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“A review of the structural framework, metamorphic history and geochronological records of the Aravalli Craton, NW India”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Wazbir Ahmed to be supplied"><span>WA</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Wazbir Ahmed</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“Variation of the kinematic vorticity number of mylonitic rocks in and around the Lumla Thrust, Western Arunachal Himalaya, Northeast India”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Bedanto Chutia to be supplied"><span>BC</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Bedanto Chutia</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“Digital image analysis of the Sela Group of rocks, Arunachal Himalaya, NE India: implications for crustal deformation”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Rituraj Hazarika to be supplied"><span>RH</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Rituraj Hazarika</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“A review study on the formation of Himalayan leucogranite”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Runjun Boruah to be supplied"><span>RB</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Runjun Boruah</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“Deformation temperature and vorticity pattern along the Barapani–Tyrsad Shear Zone, East Khasi Hills, Meghalaya”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Jubaraj Borgohain to be supplied"><span>JB</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Jubaraj Borgohain</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“A study on deformation patterns along the Tawang–Lumla section, Western Arunachal Himalaya, NE India”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Bhaskar Jyoti Dihingia to be supplied"><span>BJ</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Bhaskar Jyoti Dihingia</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“A study on partial melting of rocks in the Greater Himalayan Sequence, Western Arunachal Himalaya, NE India”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Kalpajyoti Mazumdar to be supplied"><span>KM</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Kalpajyoti Mazumdar</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“Vorticity analysis across the Zimithang Thrust, Western Arunachal Himalaya, Northeast India”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Keneisa-u-Kense to be supplied"><span>K</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Keneisa-u-Kense</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“Petrographic and microstructural studies of basement rocks in and around Nongstoin, West Khasi Hills, Meghalaya”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Rajashree Gogoi to be supplied"><span>RG</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Rajashree Gogoi</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“Deformation temperature, differential paleostress and strain rate variation in the Barapani–Tyrsad Shear Zone, East Khasi Hills, Meghalaya, NE India”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Himangshu Saikia to be supplied"><span>HS</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Himangshu Saikia</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“Concept of supercontinents: a review study”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Yashaswi Doley to be supplied"><span>YD</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Yashaswi Doley</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“Metamorphism in subduction zones”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Chajung Shamnyei Phom to be supplied"><span>CS</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Chajung Shamnyei Phom</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“Tectonic evolution of the Naga–Manipur belt”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Samudra Jyoti Dutta Baruah to be supplied"><span>SJ</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Samudra Jyoti Dutta Baruah</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“Origin and evolution of migmatites”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Ruvito K. P. Chaya to be supplied"><span>RK</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Ruvito K. P. Chaya</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“Zircon textures in igneous and metamorphic rocks”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Debashri Kuli to be supplied"><span>DK</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Debashri Kuli</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“A review study on shear zone microstructures”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Bhargabi Hazarika to be supplied"><span>BH</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Bhargabi Hazarika</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“Timing of displacement along the Main Central Thrust Zone in the Himalaya: a review study”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Ishan Jyoti Chetia to be supplied"><span>IJ</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Ishan Jyoti Chetia</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“A review study on metamorphism of the Lesser and Greater Himalayan Sequences of the Western Arunachal Himalaya, NE India”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Sabyasachi Ganguly to be supplied"><span>SG</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Sabyasachi Ganguly</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“A review of the deformational records of the Lesser Himalayan Crystalline Sequence, Northeast Himalaya, India”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Tara Shankar Goswami to be supplied"><span>TS</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Tara Shankar Goswami</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“Structural architecture across the Main Central Thrust Zone of the NE Himalaya, India”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Sourish Nath to be supplied"><span>SN</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Sourish Nath</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“A review study on the petrography, microstructure and geochemistry of the Bomdila Gneiss, Arunachal Pradesh, India”</p></div></div>
+      </li>
+      <li class="past-member scholar">
+        <div class="past-photo" role="img" aria-label="Photograph of Miraj Chetry to be supplied"><span>MC</span></div>
+        <div class="scholar-body"><div><h4 class="scholar-name">Miraj Chetry</h4><p class="scholar-role">Past M.Sc. dissertation researcher</p></div>
+        <div class="scholar-topic"><span class="label">Dissertation</span><p>“Paleoproterozoic Lesser Himalayan Crystalline Sequence: insights for the reconstruction of the Columbia supercontinent”</p></div></div>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h3 class="label" style="margin-bottom:14px">Join the group</h3>
+    <div class="panel callout">
+      <p class="justify">Applications are welcome from students with a background in geology or the earth sciences who wish to pursue research in metamorphic petrology, orogenic processes or geochronology. <a href="#contact">Application details</a></p>
+    </div>
+  </section>
+</div>
+
+<!-- PROSPECTIVE RESEARCHERS -->
+<div class="view" data-view="prospective">
+  <div class="page-head">
+    <p class="label">Prospective doctoral and postdoctoral researchers</p>
+    <h2>Research opportunities</h2>
+    <p>I would be happy to host and mentor motivated researchers whose research interests align with my areas of expertise and ongoing research themes. If you are interested in pursuing research in these areas, please feel free to contact me to discuss potential research opportunities, collaborations, and funding possibilities.</p>
+  </div>
+  <div class="panel callout">
+    <h3>Get in touch</h3>
+    <p>Please send an email outlining your research interests and relevant academic or research experience.</p>
+    <p style="margin-top:12px"><a href="mailto:purbajyotiphukon@dibru.ac.in">purbajyotiphukon@dibru.ac.in</a></p>
+  </div>
+</div>
+<!-- NEWS -->
+<div class="view" data-view="news">
+  <div class="page-head">
+    <p class="label">News</p>
+    <h2>News, talks and visits</h2>
+  </div>
+  <ul class="news">
+    <li><span class="date">Jul 2026</span><p>Talk at Goldschmidt 2026: “Unlocking Hidden Carbon: Metamorphic Degassing in the Eastern Himalaya” (with John Cottle).<span class="kind">Conference</span></p></li>
+    <li><span class="date">Jul 2026</span><p>Awarded a Goldschmidt Early Career Grant and an ANRF international travel grant to attend Goldschmidt 2026.<span class="kind">Award</span></p></li>
+    <li><span class="date">Jun 2026</span><p>Took part in a five-day faculty development programme on IKS, wellness and teaching pedagogy, IQAC, Dibrugarh University.<span class="kind">Training</span></p></li>
+    <li><span class="date">2026</span><p>Joined the Department of Applied Geology, Dibrugarh University, as Assistant Professor.<span class="kind">Group</span></p></li>
+    <li><span class="date">Apr 2026</span><p>Invited talk, M-cube (Magmatism, Metamorphism and Metallogeny) Studies Group lecture series: “Tracking Thrust Activity Through Petrochronology: Examples from the Himalaya”.<span class="kind">Invited talk</span></p></li>
+    <li><span class="date">Apr 2026</span><p>Invited talk for World Geologists' Day, Department of Geology, Gargaon College: “How Rocks Tell Time: The Story Hidden in Minerals”.<span class="kind">Outreach</span></p></li>
+    <li><span class="date">Aug 2025</span><p>Research visit to the University of Texas at Austin, USA.<span class="kind">Visit</span></p></li>
+    <li><span class="date">Jun 2025</span><p>Research visit to the University of California, Los Angeles, USA.<span class="kind">Visit</span></p></li>
+    <li><span class="date">Jan 2025</span><p>Talk at the Department of Earth Science, UC Santa Barbara: “High-grade metamorphism of pelitic rocks: a migmatite perspective”.<span class="kind">Invited talk</span></p></li>
+    <li><span class="date">Nov 2024</span><p>Began a Fulbright-Nehru Postdoctoral Research Fellowship at the University of California, Santa Barbara.<span class="kind">Award</span></p></li>
+    <li><span class="date">Nov 2023</span><p>Invited talk at the 2nd Indo-German Week of Young Researchers (ANRF–DFG): “Constraints of partial melting and melt transfer mechanisms on crustal rheology of the Himalayan orogeny”.<span class="kind">Invited talk</span></p></li>
+    <li><span class="date">Oct 2023</span><p>Research visit to IIT Kharagpur.<span class="kind">Visit</span></p></li>
+    <li><span class="date">Mar 2022</span><p>Invited monthly lecture, Structural Geology and Tectonic Studies Group of India: “Mylonites and Migmatites: Chemical mass and compositional changes”.<span class="kind">Invited talk</span></p></li>
+    <li><span class="date">Mar 2021</span><p>Research visit to Banaras Hindu University.<span class="kind">Visit</span></p></li>
+    <li><span class="date">Aug 2018</span><p>Best Paper Award of 2018, Wadia Institute of Himalayan Geology, for the <i>GSA Bulletin</i> paper on Paleoproterozoic arc magmatism in the Kumaun Himalaya. <span class="doi">DOI: <a href="https://doi.org/10.1130/B31866.1" target="_blank" rel="noopener">10.1130/B31866.1</a></span><span class="kind">Award</span></p></li>
+  </ul>
+</div>
+
+<!-- GALLERY -->
+<div class="view" data-view="gallery">
+  <div class="page-head">
+    <p class="label">Gallery</p>
+    <h2>Field and lab</h2>
+    <p>Original field photographs, mineral images, geochronology outputs, migmatite textures, photomicrographs, and laboratory images will be added here. Only photographs and research figures supplied by the laboratory will be used.</p>
+  </div>
+  <div class="gallery">
+    <figure class="tile"><div class="ph"><canvas data-pattern="foliation" aria-hidden="true"></canvas><span>Original image to be added</span></div><figcaption>Fieldwork</figcaption></figure>
+    <figure class="tile"><div class="ph"><canvas data-pattern="melt" aria-hidden="true"></canvas><span>Original image to be added</span></div><figcaption>Outcrops</figcaption></figure>
+    <figure class="tile"><div class="ph"><canvas data-pattern="zircon" aria-hidden="true"></canvas><span>Original image to be added</span></div><figcaption>Minerals, thin sections and photomicrographs</figcaption></figure>
+    <figure class="tile"><div class="ph"><canvas data-pattern="foliation" aria-hidden="true"></canvas><span>Original image to be added</span></div><figcaption>Geochronology and analytical work</figcaption></figure>
+    <figure class="tile"><div class="ph"><canvas data-pattern="melt" aria-hidden="true"></canvas><span>Original image to be added</span></div><figcaption>Conferences</figcaption></figure>
+    <figure class="tile"><div class="ph"><canvas data-pattern="zircon" aria-hidden="true"></canvas><span>Original image to be added</span></div><figcaption>Group</figcaption></figure>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="view" data-view="contact">
+  <div class="page-head">
+    <p class="label">Contact</p>
+    <h2>Get in touch</h2>
+  </div>
+  <div class="grid-2">
+    <div class="panel">
+      <h3>Dr. Purbajyoti Phukon</h3>
+      <p style="color:var(--muted);margin-bottom:16px">Assistant Professor, Department of Applied Geology</p>
+      <dl class="contact">
+        <dt>University email</dt><dd><a href="mailto:purbajyotiphukon@dibru.ac.in">purbajyotiphukon@dibru.ac.in</a> <button class="copy" type="button" data-copy="purbajyotiphukon@dibru.ac.in">Copy</button></dd>
+        <dt>Personal email</dt><dd><a href="mailto:purba.phukan205@gmail.com">purba.phukan205@gmail.com</a> <button class="copy" type="button" data-copy="purba.phukan205@gmail.com">Copy</button></dd>
+        <dt>Phone</dt><dd>+91 99578 03837</dd>
+        <dt>Address</dt><dd>Department of Applied Geology<br>Dibrugarh University<br>Dibrugarh 786004, Assam, India</dd>
+        <dt>Map</dt><dd><a href="https://www.google.com/maps/search/?api=1&amp;query=Department+of+Applied+Geology+Dibrugarh+University" target="_blank" rel="noopener">Open in Google Maps</a></dd>
+      </dl>
+    </div>
+    <div class="stack">
+      <div class="panel callout">
+        <h3>Prospective students</h3>
+        <p>Prospective M.Sc., doctoral and postdoctoral researchers in metamorphic petrology, petrochronology or Himalayan tectonics are invited to contact Dr. Phukon by email, enclosing a curriculum vitae, a summary of their academic background and a brief statement of research interests.</p>
+      </div>
+      <div class="panel">
+        <h3>Profiles</h3>
+        <div class="profile-links" style="margin-top:0">
+          <a href="https://scholar.google.com/citations?user=vQPaCTkAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>
+          <a href="https://www.researchgate.net/profile/Purbajyoti-Phukon" target="_blank" rel="noopener">ResearchGate</a>
+          <a href="https://www.dibru.ac.in/user-profile/purbajyoti-phukon" target="_blank" rel="noopener">Dibrugarh University profile</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 Purbajyoti Phukon · Department of Applied Geology, Dibrugarh University, Assam, India</span>
+    <span>Last updated November 2026</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status"></div>
+
+<!-- Review mode UI (shown only when the address contains ?review) -->
+<div class="review-bar" id="review-bar" role="region" aria-label="Review comments">
+  <span class="rb-label">Review mode</span>
+  <span class="rb-count" id="rv-count"></span>
+  <button type="button" class="rv-btn primary" id="rv-pick">Comment on a part</button>
+  <button type="button" class="rv-btn" id="rv-general">General comment</button>
+</div>
+<div class="pick-banner" id="pick-banner" role="status">
+  <span>Click the text, photo or heading you want to comment on.</span>
+  <button type="button" id="rv-pick-cancel">Cancel</button>
+</div>
+<div class="rv-dialog" id="rv-dialog" role="dialog" aria-modal="false" aria-labelledby="rv-title">
+  <h3 id="rv-title">Add a comment</h3>
+  <div class="rv-target" id="rv-target"></div>
+  <label for="rv-comment">Your comment
+    <textarea id="rv-comment" placeholder="For example: change this sentence to…, replace this photo, add a Teaching page"></textarea>
+  </label>
+  <label for="rv-name">Your name <span>(optional)</span>
+    <input type="text" id="rv-name" autocomplete="name">
+  </label>
+  <label for="rv-photo">Attach a photo or file <span>(optional, e.g. a new photo to use)</span>
+    <input type="file" id="rv-photo" accept="image/*,.pdf">
+  </label>
+  <p class="rv-error" id="rv-error" role="alert"></p>
+  <div class="rv-actions">
+    <button type="button" class="rv-btn" id="rv-cancel">Cancel</button>
+    <button type="button" class="rv-btn primary" id="rv-send">Send comment</button>
+  </div>
+</div>
+
+<!-- Static copy of the comment form so Netlify Forms can detect it at deploy time -->
+<form name="site-comments" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" hidden>
+  <input type="text" name="name">
+  <input type="text" name="page">
+  <input type="text" name="location">
+  <input type="text" name="excerpt">
+  <input type="text" name="element">
+  <textarea name="comment"></textarea>
+  <input type="file" name="photo">
+  <input type="text" name="bot-field">
+</form>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- Publications ---------- */
+  var PUBS = [
+    { y: 2026, a: "Hussain, Md. S., Phukon, P.*, Cottle, J., Adamson, M., Mazumdar, K.", t: "Linking zircon (re-)crystallization to partial melting in migmatitic orthogneiss: Constraints on the tectonometamorphic evolution of the Upper Greater Himalayan Sequence, Western Arunachal Himalaya, NE India", j: "Lithos", v: "540–541, 108682", doi: "10.1016/j.lithos.2026.108682", corr: true },
+    { y: 2025, a: "Phukon, P.*, Hussain, M.S., Imayama, T. et al.", t: "Quantifying the partial melting of Himalayan metamorphic core in Eastern Himalaya: implications for crustal rheology", j: "Contributions to Mineralogy and Petrology", v: "180(11)", doi: "10.1007/s00410-025-02200-0", first: true, corr: true },
+    { y: 2024, a: "Hussain, Md. S., Phukon, P.*, Kalita, P., Singh, A. K., Kumar, D., & Saikia, H.", t: "Tectonic evolution of the Greater Himalayan Sequence and its associated fault systems in space and time: a monazite perspective", j: "International Geology Review", v: "67(8), 1065–1097", doi: "10.1080/00206814.2024.2425988", corr: true },
+    { y: 2024, a: "Sen, A., Phukon, P., Sen, K., Bose, S., Srivastava, H.B.", t: "Exhumation mechanisms of the Himalayan metamorphic core in the Bhagirathi Valley, NW India: Insights from an integrated structural and metamorphic analysis", j: "Journal of Structural Geology", v: "179, 105043", doi: "10.1016/j.jsg.2023.105043" },
+    { y: 2022, a: "Phukon, P.", t: "Nature of the northern Indian plate margin during the assembly of supercontinent Columbia: was it a part of a double subduction?", j: "Earth-Science Reviews", v: "233, 104185", doi: "10.1016/j.earscirev.2022.104185", first: true },
+    { y: 2022, a: "Sharma, N. M., Phukon, P.*, & Bhattacharyya, P.", t: "Petrogenetic evolution of Lichi volcanics from Arunachal Himalaya, Northeast India: Insights from geochemical modelling", j: "Geological Journal", v: "1–19", doi: "10.1002/gj.4563", corr: true },
+    { y: 2022, a: "Kalita, P., Phukon, P.*, Goswami, T.K., Imayama, T., Srivastava, H.B.", t: "Chemical mass transport during deformation and metamorphism: Insights from the Main Central Thrust and its footwall of Western Arunachal Himalaya, NE India", j: "Lithos", v: "416–417, 106641", doi: "10.1016/j.lithos.2022.106641", corr: true },
+    { y: 2021, a: "Kalita, P., Goswami, T.K., Phukon, P.", t: "Deformation temperature, differential stress, and strain rate variation across the Bomdila Gneiss, western Arunachal Himalaya, India", j: "International Journal of Earth Science", v: "111, 607–622", doi: "10.1007/s00531-021-02132-7" },
+    { y: 2019, a: "Phukon, P., Sen, K., Singh, P.C., Sen, A., Srivastava, H.B., & Singhal, S.", t: "Characterizing anatexis in the Greater Himalayan Crystallines in terms of pressure, temperature, time and deformation: Integrated field, metamorphic and chronological study from Kali River Valley, Kumaun Himalaya (NW India)", j: "Lithos", v: "344–345, 22–50", doi: "10.1016/j.lithos.2019.04.018", first: true },
+    { y: 2019, a: "Phukon, P., Sen, A., Sen, K., & Srivastava, H.B.", t: "Variation in the mechanism of dynamic recrystallization and differential stress across the Chiplakot Crystalline Belt, Kali River Valley, Kumaun Himalaya: Implication for exhumation of basement rocks in a ‘critical taper wedge’ setting", j: "Himalayan Geology", v: "40, 169–181", url: "https://erp.dibru.work/media-library/faculty-dcs/42PZYddAlDWP7Erp9kJ4Arf7xX0kaJgNdECmm7eM.pdf", site: "PDF", first: true },
+    { y: 2018, a: "Phukon, P., Sen, K., Srivastava, H.B., Singhal, S. & Sen, A.", t: "U–Pb geochronology and geochemistry from the Kumaun Himalaya, NW India, reveal Paleoproterozoic arc magmatism related to formation of the Columbia supercontinent", j: "Geological Society of America Bulletin", v: "130(7–8), 1164–1176", doi: "10.1130/B31866.1", first: true },
+    { y: 2018, a: "Sen, A., Sen, K., Srivastava, H. B., Singhal, S., Phukon, P.", t: "Age and geochemistry of the Paleoproterozoic Bhatwari Gneiss of Garhwal Lesser Himalaya, NW India: implications for the pre-Himalayan magmatic history of the Lesser Himalayan basement rocks", j: "Journal of the Geological Society of London, Special Publication", v: "481, 21 p.", url: "https://sp.lyellcollection.org/content/481/1/319", site: "Lyell Collection" }
+  ];
+
+  var EXT_ICON = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>';
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function authorsHTML(a) { return esc(a).replace(/Phukon, P\.(\*?)/, "<strong>Phukon, P.$1</strong>"); }
+
+  var listEl = document.getElementById("pub-list");
+  var countEl = document.getElementById("pub-count");
+  var searchEl = document.getElementById("pub-search");
+  var filter = "all";
+
+  function renderPubs() {
+    var q = (searchEl.value || "").trim().toLowerCase();
+    var items = PUBS.filter(function (p) {
+      if (filter === "first" && !p.first) return false;
+      if (filter === "corr" && !p.corr) return false;
+      if (!q) return true;
+      return (p.t + " " + p.a + " " + p.j + " " + (p.doi || "")).toLowerCase().indexOf(q) !== -1;
+    });
+    countEl.textContent = items.length + (items.length === 1 ? " article" : " articles") + (items.length !== PUBS.length ? " of " + PUBS.length : "");
+    if (!items.length) { listEl.innerHTML = '<p class="empty">No articles match that search. Try a different word, or choose All.</p>'; return; }
+    var rows = items.map(function (p) {
+        var href = p.doi ? "https://doi.org/" + p.doi : p.url;
+        var where = p.doi ? "the journal website" : (p.site === "PDF" ? "the full text (PDF)" : p.site);
+        var icon = '<a class="ext-link" href="' + esc(href) + '" target="_blank" rel="noopener" title="Open article on ' + esc(where) + '" aria-label="Open article on ' + esc(where) + '">' + EXT_ICON + '</a>';
+        return '<li class="pub"><div class="title">' + esc(p.t) + icon + (p.award ? '<span class="badge">' + esc(p.award) + '</span>' : '') + '</div>' +
+          '<div class="authors">' + authorsHTML(p.a) + '</div>' +
+          '<div class="venue"><i>' + esc(p.j) + '</i>' + (p.v ? ", " + esc(p.v) : "") + '</div>' +
+          (p.doi ? '<div class="doi-line">DOI: <a href="https://doi.org/' + esc(p.doi) + '" target="_blank" rel="noopener">' + esc(p.doi) + '</a></div>'
+                 : '<div class="doi-line"><a href="' + esc(p.url) + '" target="_blank" rel="noopener">' + (p.site === "PDF" ? "Full text (PDF)" : "View on " + esc(p.site)) + '</a></div>') +
+          '</li>';
+      }).join("");
+    listEl.innerHTML = '<ul class="pubs">' + rows + '</ul>';
+  }
+  searchEl.addEventListener("input", renderPubs);
+  document.querySelectorAll(".seg button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      filter = b.getAttribute("data-filter");
+      document.querySelectorAll(".seg button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      renderPubs();
+    });
+  });
+  renderPubs();
+
+  /* ---------- Router ---------- */
+  var VIEWS = ["home", "about", "research", "publications", "group", "prospective", "news", "gallery", "contact"];
+  var nav = document.getElementById("site-nav");
+  var menuBtn = document.getElementById("menu-btn");
+  function route() {
+    var h = (location.hash || "").replace("#", "");
+    var name = VIEWS.indexOf(h) !== -1 ? h : "home";
+    document.querySelectorAll(".view").forEach(function (v) { v.classList.toggle("active", v.getAttribute("data-view") === name); });
+    nav.querySelectorAll("a").forEach(function (a) {
+      if (a.getAttribute("href") === "#" + name) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+    });
+    nav.classList.remove("open"); menuBtn.setAttribute("aria-expanded", "false");
+    window.scrollTo(0, 0);
+    drawPatterns();
+    if (name === "home") { drawPT(); drawRidges(); }
+  }
+  window.addEventListener("hashchange", route);
+  menuBtn.addEventListener("click", function () {
+    var open = nav.classList.toggle("open");
+    menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+
+  /* ---------- Copy buttons ---------- */
+  var toast = document.getElementById("toast");
+  function showToast(msg) { toast.textContent = msg; toast.classList.add("show"); setTimeout(function () { toast.classList.remove("show"); }, 1800); }
+  document.querySelectorAll("[data-copy]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var text = b.getAttribute("data-copy");
+      try {
+        navigator.clipboard.writeText(text).then(function () { showToast("Email address copied"); }, function () { showToast("Copy failed. Select the address and copy it instead."); });
+      } catch (e) { showToast("Copy failed. Select the address and copy it instead."); }
+    });
+  });
+
+  /* ---------- Theme colours ---------- */
+  function tok(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+  function setupCanvas(c, ratio) {
+    var dpr = window.devicePixelRatio || 1;
+    var w = c.clientWidth || c.parentNode.clientWidth;
+    var h = ratio ? w * ratio : (c.clientHeight || c.parentNode.clientHeight);
+    if (!w || !h) return null;
+    c.width = Math.round(w * dpr); c.height = Math.round(h * dpr);
+    var ctx = c.getContext("2d");
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return { ctx: ctx, w: w, h: h };
+  }
+
+  /* ---------- Decorative patterns (placeholders) ---------- */
+  function drawPatterns() {
+    document.querySelectorAll(".view.active canvas[data-pattern]").forEach(function (c) {
+      var s = setupCanvas(c); if (!s) return;
+      var ctx = s.ctx, w = s.w, h = s.h, kind = c.getAttribute("data-pattern");
+      ctx.clearRect(0, 0, w, h);
+      ctx.strokeStyle = tok("--rule"); ctx.lineWidth = 1;
+      if (kind === "zircon") {
+        // oscillatory growth zoning, like a cathodoluminescence image of zircon
+        var cx = w / 2, cy = h / 2, n = 16;
+        for (var i = 1; i <= n; i++) {
+          var r = i / n, hw = w * 0.32 * r, hh = h * 0.42 * r, tip = hh * 0.35;
+          ctx.beginPath();
+          ctx.moveTo(cx, cy - hh - tip); ctx.lineTo(cx + hw, cy - hh); ctx.lineTo(cx + hw, cy + hh);
+          ctx.lineTo(cx, cy + hh + tip); ctx.lineTo(cx - hw, cy + hh); ctx.lineTo(cx - hw, cy - hh); ctx.closePath();
+          ctx.globalAlpha = i % 3 === 0 ? 0.9 : 0.45; ctx.stroke();
+        }
+        ctx.globalAlpha = 1;
+      } else if (kind === "foliation") {
+        for (var x = -h; x < w + h; x += 9) {
+          ctx.beginPath(); ctx.moveTo(x, h);
+          ctx.bezierCurveTo(x + h * 0.2, h * 0.6, x + h * 0.4, h * 0.45, x + h * 0.7, 0); ctx.stroke();
+        }
+      } else if (kind === "melt") {
+        for (var y = 8; y < h; y += 10) {
+          ctx.beginPath();
+          for (var xx = 0; xx <= w; xx += 6) {
+            var yy = y + Math.sin(xx / 22 + y / 30) * 4;
+            if (xx === 0) ctx.moveTo(xx, yy); else ctx.lineTo(xx, yy);
+          }
+          ctx.stroke();
+        }
+      }
+    });
+  }
+
+  /* ---------- P–T diagram ---------- */
+  var ptCanvas = document.getElementById("pt");
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var animStart = null, raf = null;
+
+  // Clockwise P–T path (T in °C, P in kbar), schematic
+  var PATH = [[520, 5.4], [575, 7.6], [630, 9.3], [690, 10.2], [740, 9.7], [768, 8.3], [770, 6.6], [748, 5.1], [700, 3.9], [630, 3.1], [560, 2.6]];
+
+  function catmull(points, steps) {
+    var out = [];
+    for (var i = 0; i < points.length - 1; i++) {
+      var p0 = points[i - 1] || points[i], p1 = points[i], p2 = points[i + 1], p3 = points[i + 2] || p2;
+      for (var s = 0; s < steps; s++) {
+        var t = s / steps, t2 = t * t, t3 = t2 * t;
+        out.push([0, 1].map(function (k) {
+          return 0.5 * ((2 * p1[k]) + (-p0[k] + p2[k]) * t + (2 * p0[k] - 5 * p1[k] + 4 * p2[k] - p3[k]) * t2 + (-p0[k] + 3 * p1[k] - 3 * p2[k] + p3[k]) * t3);
+        }));
+      }
+    }
+    out.push(points[points.length - 1]);
+    return out;
+  }
+  var SMOOTH = catmull(PATH, 14);
+
+  function drawPT(progressDot) {
+    if (!ptCanvas || !ptCanvas.offsetParent) return;
+    var s = setupCanvas(ptCanvas, 0.8); if (!s) return;
+    var ctx = s.ctx, W = s.w, H = s.h;
+    var ink = tok("--ink"), muted = tok("--muted"), rule = tok("--rule"), garnet = tok("--melt"), kyanite = tok("--kyanite"), tint = tok("--melt-tint");
+    var small = W < 420;
+    var L = small ? 40 : 50, R = 12, T = 12, B = small ? 36 : 42;
+    var T0 = 400, T1 = 900, P0 = 0, P1 = 14;
+    function X(t) { return L + (t - T0) / (T1 - T0) * (W - L - R); }
+    function Y(p) { return H - B - (p - P0) / (P1 - P0) * (H - T - B); }
+    ctx.clearRect(0, 0, W, H);
+    var fs = small ? 10.5 : 12;
+    ctx.font = "500 " + fs + "px 'Source Sans 3', system-ui, sans-serif";
+
+    // grid
+    ctx.strokeStyle = rule; ctx.lineWidth = 1; ctx.fillStyle = muted;
+    ctx.textAlign = "center"; ctx.textBaseline = "top";
+    for (var t = 400; t <= 900; t += 100) {
+      ctx.beginPath(); ctx.moveTo(X(t), Y(P0)); ctx.lineTo(X(t), Y(P1)); ctx.stroke();
+      ctx.fillText(String(t), X(t), Y(P0) + 6);
+    }
+    ctx.textAlign = "right"; ctx.textBaseline = "middle";
+    for (var p = 0; p <= 14; p += 2) {
+      ctx.beginPath(); ctx.moveTo(X(T0), Y(p)); ctx.lineTo(X(T1), Y(p)); ctx.stroke();
+      ctx.fillText(String(p), X(T0) - 6, Y(p));
+    }
+    ctx.textAlign = "center"; ctx.textBaseline = "bottom";
+    ctx.fillText("Temperature (°C)", (X(T0) + X(T1)) / 2, H - 1);
+    ctx.save(); ctx.translate(11, (Y(P0) + Y(P1)) / 2); ctx.rotate(-Math.PI / 2); ctx.textBaseline = "middle"; ctx.fillText("Pressure (kbar)", 0, 0); ctx.restore();
+
+    // clip to plot area
+    ctx.save(); ctx.beginPath(); ctx.rect(X(T0), Y(P1), X(T1) - X(T0), Y(P0) - Y(P1)); ctx.clip();
+
+    // melt-present field (right of solidus / muscovite-dehydration melting)
+    var wetSol = [[770, 0], [745, 1], [700, 2.4], [672, 4], [660, 4.8]];
+    var msMelt = [[660, 4.8], [700, 7.2], [740, 9.6], [775, 12], [800, 14]];
+    ctx.beginPath();
+    wetSol.concat(msMelt.slice(1)).forEach(function (pt, i) { if (i === 0) ctx.moveTo(X(pt[0]), Y(pt[1])); else ctx.lineTo(X(pt[0]), Y(pt[1])); });
+    ctx.lineTo(X(900), Y(14)); ctx.lineTo(X(900), Y(0)); ctx.closePath();
+    ctx.fillStyle = tint; ctx.fill();
+
+    function line(pts, color, width, dash) {
+      ctx.beginPath(); ctx.setLineDash(dash || []);
+      pts.forEach(function (pt, i) { if (i === 0) ctx.moveTo(X(pt[0]), Y(pt[1])); else ctx.lineTo(X(pt[0]), Y(pt[1])); });
+      ctx.strokeStyle = color; ctx.lineWidth = width; ctx.stroke(); ctx.setLineDash([]);
+    }
+    // aluminosilicate phase boundaries, triple point near 500 °C and 3.8 kbar
+    var tp = [504, 3.75];
+    line([tp, [900, 11.9]], kyanite, 1.4);
+    line([tp, [770, 0]], kyanite, 1.4);
+    line([tp, [400, 2.4]], kyanite, 1.4);
+    // solidus and muscovite dehydration melting
+    line(wetSol, garnet, 1.2, [5, 4]);
+    line(msMelt, garnet, 1.2, [5, 4]);
+    ctx.restore();
+
+    // field labels
+    ctx.font = "italic 600 " + (small ? 13 : 15) + "px 'Spectral', Georgia, serif";
+    ctx.fillStyle = kyanite; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.fillText("Ky", X(445), Y(8.5));
+    ctx.fillText("Sil", X(862), Y(4.6));
+    ctx.fillText("And", X(440), Y(0.9));
+    ctx.font = "600 " + (small ? 10 : 11.5) + "px 'Barlow Condensed', 'Arial Narrow', sans-serif";
+    ctx.fillStyle = garnet; ctx.textAlign = "left";
+    ctx.textAlign = "center";
+    ctx.fillText("PARTIAL", X(850), Y(2.3));
+    ctx.fillText("MELTING", X(850), Y(1.5));
+    ctx.fillStyle = muted; ctx.textAlign = "right";
+    ctx.fillText("Ms-dehydration melting", X(770), Y(12.9));
+
+    // P–T path
+    ctx.beginPath();
+    SMOOTH.forEach(function (pt, i) { if (i === 0) ctx.moveTo(X(pt[0]), Y(pt[1])); else ctx.lineTo(X(pt[0]), Y(pt[1])); });
+    ctx.strokeStyle = ink; ctx.lineWidth = 2.6; ctx.lineJoin = "round"; ctx.stroke();
+    // arrowheads along path
+    [Math.floor(SMOOTH.length * 0.22), Math.floor(SMOOTH.length * 0.62), SMOOTH.length - 1].forEach(function (idx) {
+      var a = SMOOTH[Math.max(idx - 2, 0)], b = SMOOTH[idx];
+      var ang = Math.atan2(Y(b[1]) - Y(a[1]), X(b[0]) - X(a[0]));
+      var x = X(b[0]), y = Y(b[1]), sz = 8;
+      ctx.beginPath(); ctx.moveTo(x, y);
+      ctx.lineTo(x - sz * Math.cos(ang - 0.45), y - sz * Math.sin(ang - 0.45));
+      ctx.lineTo(x - sz * Math.cos(ang + 0.45), y - sz * Math.sin(ang + 0.45));
+      ctx.closePath(); ctx.fillStyle = ink; ctx.fill();
+    });
+
+    // annotations
+    ctx.font = "600 " + (small ? 10.5 : 12) + "px 'Barlow Condensed', 'Arial Narrow', sans-serif";
+    ctx.fillStyle = ink;
+    ctx.textAlign = "right"; ctx.fillText("BURIAL", X(570), Y(8.6));
+    ctx.textAlign = "center"; ctx.fillText("PEAK P", X(690), Y(11.1));
+    ctx.textAlign = "left"; ctx.fillText("PEAK T", X(782), Y(7.9)); ctx.fillText("+ MELT", X(782), Y(7.1));
+    ctx.textAlign = "center"; ctx.fillText("EXHUMATION", X(610), Y(2.0));
+
+    // moving marker
+    var idx = progressDot == null ? Math.floor(SMOOTH.length * 0.6) : Math.min(SMOOTH.length - 1, Math.floor(progressDot * (SMOOTH.length - 1)));
+    var m = SMOOTH[idx];
+    ctx.beginPath(); ctx.arc(X(m[0]), Y(m[1]), 6, 0, Math.PI * 2);
+    ctx.fillStyle = garnet; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = tok("--surface"); ctx.stroke();
+  }
+
+  function loop(ts) {
+    if (animStart === null) animStart = ts;
+    var period = 9000, e = ((ts - animStart) % period) / period;
+    // travel for 80% of the cycle, then rest at the end of the path
+    var prog = Math.min(1, e / 0.8);
+    var eased = prog < 0.5 ? 2 * prog * prog : 1 - Math.pow(-2 * prog + 2, 2) / 2;
+    drawPT(eased);
+    raf = requestAnimationFrame(loop);
+  }
+
+  function startPT() {
+    if (raf) cancelAnimationFrame(raf);
+    if (reduce) { drawPT(); return; }
+    raf = requestAnimationFrame(loop);
+  }
+
+  /* ---------- Hero landscape (stand-in until a photograph is added) ---------- */
+  function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; var t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  function ridgeLine(rand, n, rough, h0, h1, amp) {
+    var size = 1 << n, a = new Array(size + 1), d = amp;
+    a[0] = h0; a[size] = h1;
+    for (var step = size; step > 1; step >>= 1) {
+      for (var i = 0; i < size; i += step) { a[i + step / 2] = (a[i] + a[i + step]) / 2 + (rand() * 2 - 1) * d; }
+      d *= rough;
+    }
+    return a;
+  }
+  function smooth(e0, e1, x) { var t = Math.max(0, Math.min(1, (x - e0) / (e1 - e0))); return t * t * (3 - 2 * t); }
+  function drawRidges() {
+    var band = document.getElementById("hero-band");
+    var c = document.getElementById("ridge");
+    if (!c || !band || band.classList.contains("has-photo") || !c.offsetParent) return;
+    var st = setupCanvas(c); if (!st) return;
+    var ctx = st.ctx, w = st.w, h = st.h;
+    // sky: night blue above, dawn light on the horizon behind the peaks
+    var sky = ctx.createLinearGradient(0, 0, 0, h);
+    sky.addColorStop(0, "#101b28"); sky.addColorStop(0.45, "#3b5069"); sky.addColorStop(0.72, "#9a8b88"); sky.addColorStop(1, "#c7a68f");
+    ctx.fillStyle = sky; ctx.fillRect(0, 0, w, h);
+    var glow = ctx.createRadialGradient(w * 0.74, h * 0.6, 0, w * 0.74, h * 0.6, Math.max(w, h) * 0.55);
+    glow.addColorStop(0, "rgba(255, 214, 170, 0.45)"); glow.addColorStop(1, "rgba(255, 214, 170, 0)");
+    ctx.fillStyle = glow; ctx.fillRect(0, 0, w, h);
+    var layers = [
+      { seed: 11, base: 0.68, amp: 0.17, rough: 0.50, h0: 0.05, h1: 0.20, top: "#f4f7fa", bot: "#8c9fb4", peak: true },
+      { seed: 23, base: 0.74, amp: 0.08, rough: 0.52, h0: 0.05, h1: 0.10, top: "#6d8199", bot: "#4c5d71" },
+      { seed: 37, base: 0.82, amp: 0.06, rough: 0.50, h0: 0.07, h1: 0.04, top: "#435366", bot: "#334050" },
+      { seed: 51, base: 0.90, amp: 0.05, rough: 0.48, h0: 0.03, h1: 0.07, top: "#2a3542", bot: "#212a35" },
+      { seed: 67, base: 0.99, amp: 0.04, rough: 0.46, h0: 0.06, h1: 0.03, top: "#19212a", bot: "#131920" }
+    ];
+    layers.forEach(function (L, li) {
+      var rand = mulberry32(L.seed);
+      var pts = ridgeLine(rand, 8, L.rough, L.h0, L.h1, L.amp);
+      var n = pts.length - 1, minY = h;
+      var ys = pts.map(function (v, i) {
+        var x = i / n;
+        var env = L.peak ? 0.25 + 0.95 * smooth(0.12, 0.62, x) : 1;
+        var y = h * (L.base - Math.max(0.005, v) * env * (L.peak ? 1.9 : 1));
+        if (y < minY) minY = y;
+        return y;
+      });
+      ctx.beginPath(); ctx.moveTo(0, h);
+      ys.forEach(function (y, i) { ctx.lineTo(i / n * w, y); });
+      ctx.lineTo(w, h); ctx.closePath();
+      var g = ctx.createLinearGradient(0, minY, 0, h * L.base);
+      g.addColorStop(0, L.top); g.addColorStop(1, L.bot);
+      ctx.fillStyle = g; ctx.fill();
+      if (L.peak) {
+        // thin light rim along the crest, as if lit by low sun from the right
+        ctx.beginPath();
+        ys.forEach(function (y, i) { if (i === 0) ctx.moveTo(0, y); else ctx.lineTo(i / n * w, y); });
+        ctx.strokeStyle = "rgba(255, 236, 214, 0.55)"; ctx.lineWidth = 1.2; ctx.stroke();
+      }
+      // haze in front of each range for depth
+      if (li < layers.length - 1) {
+        var hz = ctx.createLinearGradient(0, h * (L.base - 0.06), 0, h * (L.base + 0.06));
+        hz.addColorStop(0, "rgba(160, 150, 150, 0)"); hz.addColorStop(1, "rgba(160, 150, 150, 0.28)");
+        ctx.fillStyle = hz; ctx.fillRect(0, h * (L.base - 0.06), w, h * 0.12);
+      }
+    });
+  }
+
+  /* ---------- Redraw on theme / size changes ---------- */
+  function redrawAll() { drawPatterns(); drawRidges(); if (reduce || !raf) drawPT(); }
+  new MutationObserver(redrawAll).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme", "class", "style"] });
+  if (window.matchMedia) {
+    var mq = window.matchMedia("(prefers-color-scheme: dark)");
+    if (mq.addEventListener) mq.addEventListener("change", redrawAll);
+  }
+  var rt; window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(redrawAll, 120); });
+
+  /* ---------- Review mode: comments from reviewers (only with ?review) ---------- */
+  (function reviewMode() {
+    if (!/[?&]review\b/.test(location.search)) return;
+    document.documentElement.classList.add("review-on");
+    var bar = document.getElementById("review-bar"), dialog = document.getElementById("rv-dialog");
+    var targetBox = document.getElementById("rv-target"), commentEl = document.getElementById("rv-comment");
+    var nameEl = document.getElementById("rv-name"), photoEl = document.getElementById("rv-photo");
+    var errEl = document.getElementById("rv-error"), sendBtn = document.getElementById("rv-send");
+    var countEl = document.getElementById("rv-count");
+    var PICKABLE = "p, h1, h2, h3, h4, li, img, figure, dt, dd, td, th, .btn, .scholar, .panel, .brand, .nav a, .hero-text, .affil, .pi-card .portrait";
+    var picking = false, hoverEl = null, selectedEl = null, current = null, sent = 0;
+    try { nameEl.value = localStorage.getItem("rv-name") || ""; } catch (e) {}
+
+    function viewName() { var v = document.querySelector(".view.active"); return v ? v.getAttribute("data-view") : "home"; }
+    function pageTitle(name) { var a = nav.querySelector('a[href="#' + name + '"]'); return a ? a.textContent.trim() : name; }
+    function clean(t) { return (t || "").replace(/\s+/g, " ").trim(); }
+    function nearestHeading(el) {
+      var scope = el.closest(".view") || el.closest("header, footer") || document.body;
+      var heads = scope.querySelectorAll("h1, h2, h3, .label"), found = "";
+      for (var i = 0; i < heads.length; i++) {
+        var h = heads[i];
+        if (h === el || h.contains(el) || (h.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_FOLLOWING)) found = clean(h.textContent);
+      }
+      return found;
+    }
+    function cssPath(el) {
+      var parts = [];
+      while (el && el.nodeType === 1 && parts.length < 6 && el !== document.body) {
+        var part = el.tagName.toLowerCase();
+        if (el.id) { parts.unshift(part + "#" + el.id); break; }
+        var cls = (el.className && typeof el.className === "string") ? el.className.trim().split(/\s+/).filter(function (c) { return c.indexOf("pick-") !== 0 && c !== "active"; })[0] : "";
+        if (cls) part += "." + cls;
+        parts.unshift(part); el = el.parentElement;
+      }
+      return parts.join(" > ");
+    }
+    function describe(el) {
+      var excerpt = el.tagName === "IMG" ? "Image: " + (el.getAttribute("alt") || "photo") :
+        (el.querySelector && el.querySelector("img") && !clean(el.textContent)) ? "Image: " + (el.querySelector("img").getAttribute("alt") || "photo") : clean(el.textContent);
+      if (excerpt.length > 180) excerpt = excerpt.slice(0, 177) + "…";
+      var inHeader = !!el.closest(".site-header"), inFooter = !!el.closest("footer");
+      var page = inHeader ? "Header (all pages)" : inFooter ? "Footer (all pages)" : pageTitle(viewName());
+      return { page: page, location: inHeader || inFooter ? "" : nearestHeading(el), excerpt: excerpt, element: cssPath(el) };
+    }
+    function updateCount() { countEl.textContent = sent ? sent + (sent === 1 ? " comment sent" : " comments sent") : ""; }
+
+    function setHover(el) { if (hoverEl) hoverEl.classList.remove("pick-hover"); hoverEl = el; if (el) el.classList.add("pick-hover"); }
+    function startPick() { closeDialog(); picking = true; document.documentElement.classList.add("picking"); }
+    function stopPick() { picking = false; document.documentElement.classList.remove("picking"); setHover(null); }
+    function pickTarget(e) {
+      var t = e.target;
+      if (!t || !t.closest || t.closest(".review-bar, .rv-dialog, .pick-banner")) return null;
+      return t.closest(PICKABLE) || t.closest("section, .view, .hero-band");
+    }
+    document.addEventListener("mouseover", function (e) { if (picking) setHover(pickTarget(e)); }, true);
+    document.addEventListener("click", function (e) {
+      if (!picking) return;
+      var el = pickTarget(e);
+      if (!el) return;
+      e.preventDefault(); e.stopPropagation();
+      stopPick();
+      openDialog(el);
+    }, true);
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") { if (picking) stopPick(); else if (dialog.classList.contains("open")) closeDialog(); } });
+
+    function openDialog(el) {
+      if (selectedEl) selectedEl.classList.remove("pick-selected");
+      selectedEl = el || null;
+      if (el) {
+        el.classList.add("pick-selected");
+        current = describe(el);
+      } else {
+        current = { page: pageTitle(viewName()), location: "General comment", excerpt: "", element: "" };
+      }
+      targetBox.textContent = "";
+      var b = document.createElement("b"); b.textContent = current.page + (current.location ? " › " + current.location : "");
+      targetBox.appendChild(b);
+      if (current.excerpt) { var q = document.createElement("q"); q.textContent = current.excerpt; targetBox.appendChild(q); }
+      errEl.classList.remove("show"); commentEl.value = ""; photoEl.value = "";
+      dialog.classList.add("open"); bar.style.display = "none";
+      setTimeout(function () { commentEl.focus(); }, 0);
+    }
+    function closeDialog() {
+      dialog.classList.remove("open"); bar.style.display = "";
+      if (selectedEl) { selectedEl.classList.remove("pick-selected"); selectedEl = null; }
+    }
+    function showError(msg) { errEl.textContent = msg; errEl.classList.add("show"); }
+
+    function shrinkImage(file) {
+      return new Promise(function (resolve) {
+        if (!file || !/^image\/(jpeg|png|webp)$/.test(file.type) || file.size < 2.5 * 1024 * 1024) return resolve(file);
+        var img = new Image(), url = URL.createObjectURL(file);
+        img.onload = function () {
+          var scale = Math.min(1, 2400 / Math.max(img.width, img.height));
+          var c = document.createElement("canvas"); c.width = Math.round(img.width * scale); c.height = Math.round(img.height * scale);
+          c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+          c.toBlob(function (blob) { URL.revokeObjectURL(url); resolve(blob ? new File([blob], file.name.replace(/\.\w+$/, "") + ".jpg", { type: "image/jpeg" }) : file); }, "image/jpeg", 0.85);
+        };
+        img.onerror = function () { URL.revokeObjectURL(url); resolve(file); };
+        img.src = url;
+      });
+    }
+
+    document.getElementById("rv-pick").addEventListener("click", startPick);
+    document.getElementById("rv-pick-cancel").addEventListener("click", stopPick);
+    document.getElementById("rv-general").addEventListener("click", function () { openDialog(null); });
+    document.getElementById("rv-cancel").addEventListener("click", closeDialog);
+    sendBtn.addEventListener("click", function () {
+      var text = commentEl.value.trim();
+      if (!text) { showError("Please write your comment before sending."); commentEl.focus(); return; }
+      var file = photoEl.files && photoEl.files[0];
+      sendBtn.disabled = true; sendBtn.textContent = "Sending…"; errEl.classList.remove("show");
+      try { localStorage.setItem("rv-name", nameEl.value.trim()); } catch (e) {}
+      shrinkImage(file).then(function (f) {
+        if (f && f.size > 7.5 * 1024 * 1024) throw new Error("too-big");
+        var fd = new FormData();
+        fd.append("form-name", "site-comments");
+        fd.append("name", nameEl.value.trim());
+        fd.append("page", current.page);
+        fd.append("location", current.location);
+        fd.append("excerpt", current.excerpt);
+        fd.append("element", current.element);
+        fd.append("comment", text);
+        fd.append("bot-field", "");
+        if (f) fd.append("photo", f, f.name || "attachment");
+        return fetch("/", { method: "POST", body: fd });
+      }).then(function (res) {
+        if (!res.ok) throw new Error("status " + res.status);
+        sent += 1; updateCount(); closeDialog();
+        showToast("Thank you. Your comment has been sent.");
+      }).catch(function (err) {
+        showError(err && err.message === "too-big"
+          ? "That file is too large. Please choose a file under 7 MB."
+          : "The comment could not be sent. Check your internet connection and try again.");
+      }).then(function () { sendBtn.disabled = false; sendBtn.textContent = "Send comment"; });
+    });
+  })();
+
+  route();
+  drawPT();
+  startPT();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(redrawAll);
+})();
+</script>
+
+<style>
+/* MetPetTec Lab requested visual and content updates */
+.hero-band { min-height: 500px; }
+.hero-panorama { position:absolute; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; opacity:.92; }
+.hero-band.has-photo .hero-panorama { display:none; }
+.hero-visuals { position:absolute; right:2.5%; top:18%; width:min(42%,520px); height:68%; pointer-events:none; }
+.visual-card { position:absolute; width:clamp(112px,13vw,170px); min-height:116px; padding:10px; border:1px solid rgba(255,255,255,.48); border-radius:9px; background:rgba(10,30,44,.58); box-shadow:0 12px 28px rgba(0,0,0,.22); backdrop-filter:blur(7px); }
+.visual-kicker { display:block; color:#f6f8f5; font:600 .78rem var(--font-label); letter-spacing:.09em; text-transform:uppercase; }
+.visual-art { display:block; height:76px; margin-top:7px; overflow:hidden; border-radius:5px; position:relative; }
+.visual-field { top:0; right:4%; transform:rotate(3deg); }.visual-zircon { top:30%; left:0; transform:rotate(-4deg); }.visual-migmatite { bottom:0; right:0; transform:rotate(-2deg); }.visual-metals { bottom:7%; left:24%; transform:rotate(3deg); }
+.field-art { background:linear-gradient(155deg,#9ab2b5 0 28%,#596d6a 29% 48%,#b4a58c 49% 57%,#344c51 58%); }
+.field-art:after { content:""; position:absolute; inset:12px 22px; border-left:3px solid #e9e3ce; border-bottom:3px solid #e9e3ce; transform:skew(-22deg); opacity:.85; }
+.zircon-art { background:radial-gradient(ellipse at center,#d9d5c4 0 6%,#5c7185 7% 12%,#d0d6d0 13% 19%,#41586d 20% 24%,#c8c8bd 25% 35%,#243d52 36% 100%); }
+.zircon-art:after { content:""; position:absolute; width:40px;height:58px;left:calc(50% - 20px);top:9px; border:2px solid #e5e6d8; transform:rotate(45deg); box-shadow:0 0 0 6px rgba(220,230,225,.18); }
+.migmatite-art { background:repeating-linear-gradient(155deg,#454d4c 0 8px,#c5b79b 9px 14px,#5c6965 15px 24px,#d9d0bb 25px 30px); }
+.metals-art { background:radial-gradient(circle at 25% 45%,#d9b65f 0 8%,transparent 9%),radial-gradient(circle at 68% 34%,#b5c0bd 0 10%,transparent 11%),radial-gradient(circle at 52% 72%,#8e7751 0 12%,transparent 13%),linear-gradient(135deg,#263e49,#687a78); }
+@media(max-width:850px){.hero-visuals{opacity:.32;right:-4%;width:65%;top:12%;}.visual-card{width:125px;}.hero-text{position:relative;z-index:1;}}
+@media(max-width:560px){.hero-visuals{display:none;}}
+.profile-pending { color:var(--muted); font-size:.92rem; }
+.institution-logos li { display:flex; flex-direction:column; align-items:flex-start; gap:12px; min-height:180px; }
+.institution-mark { width:78px;height:58px;display:grid;place-items:center;border-radius:8px;background:#f1f4f7;color:#17365d;border:1px solid #d9e1ec;font:700 1.15rem var(--font-label);letter-spacing:.05em; }
+.mark-cas { color:#8d2e2c; }.mark-ubc{color:#a51c30;}.mark-okayama{color:#315c9b;}
+.logo-note { color:var(--muted);font-size:.9rem;margin-top:14px; }
+.past-scholars { grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); }
+.past-member { min-height:310px; }
+.past-photo { width:150px;height:150px;display:grid;place-items:center;border:1px dashed var(--rule);border-radius:8px;background:linear-gradient(145deg,#edf1f3,#dce4e8);color:#526779; }
+.past-photo span { font:600 2rem var(--font-display); }
+.past-member .scholar-body { padding-top:12px; }
+[data-view="prospective"] .page-head p:not(.label) { max-width:75ch; }
+@media(max-width:700px){.hero-band{min-height:440px;}}
+</style>
+
+
+<style id="reference-homepage-design">
+:root{--paper:#091923!important;--surface:#132a38!important;--ink:#edf2f3!important;--muted:#b4c2c7!important;--rule:rgba(186,205,211,.22)!important;--accent:#e4a16d!important;color-scheme:dark}
+html,body{background:#091923!important;color:#edf2f3!important}body{background:linear-gradient(145deg,#081720,#102735 58%,#091923)!important}
+.site-header{position:relative!important;background:rgba(5,20,30,.97)!important;border-bottom:1px solid rgba(224,161,109,.35)!important}
+.reference-header-inner{max-width:none!important;width:100%;min-height:98px!important;padding:10px 26px!important;display:grid!important;grid-template-columns:minmax(300px,1.1fr) minmax(280px,.85fr) minmax(500px,2fr)!important;gap:18px!important}
+.reference-brand{display:flex!important;flex-direction:row!important;align-items:center!important;gap:10px!important;color:#f4eee6!important;min-width:0}.brand-mountain{width:105px;height:50px;flex:none;color:#f2eee6}
+.reference-brand .brand-name{font:600 clamp(25px,2.4vw,38px) var(--font-display)!important;letter-spacing:-.03em!important;white-space:nowrap}.reference-brand .brand-name em{color:#e5a16d;font-style:normal}.reference-brand .brand-sub{font:13px var(--font-display);color:#d5e0e2;white-space:nowrap}
+.university-lockup{display:flex;align-items:center;justify-content:flex-end;gap:14px;border-left:1px solid #e8efee66;padding-left:20px;color:#f2f4f0}.university-lockup>span{order:1;text-align:right}.university-lockup .brand-logo{order:2;width:64px;height:64px;border-radius:50%;object-fit:cover;object-position:center 48%;background:#fff;flex:none;border:2px solid rgba(238,199,161,.75);box-shadow:0 4px 14px rgba(0,0,0,.28)}.university-lockup b{display:block;font:600 13px var(--font-label);letter-spacing:.12em;white-space:nowrap}.university-lockup small{display:block;color:#d0dcdf;font-size:13px;white-space:nowrap}
+.reference-nav{display:flex!important;flex-direction:column!important;align-items:flex-end;gap:7px!important}.reference-nav .nav-main,.reference-nav .nav-secondary{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:3px}.reference-nav a{font:500 14px var(--font-label)!important;text-transform:none!important;letter-spacing:.01em!important;color:#f0f2ef!important;padding:7px 8px!important;border-radius:5px!important}.reference-nav .nav-main a:first-child{background:#9b6747!important;box-shadow:0 0 0 1px #d9a477 inset!important}.reference-nav .nav-secondary{gap:16px}.reference-nav .nav-secondary a{font-size:13px!important}
+main.wrap{max-width:1480px!important;padding:0 26px 70px!important}
+.reference-hero{position:relative;isolation:isolate;overflow:hidden;min-height:360px;margin:0 -26px 26px;padding:34px 36px;display:grid;grid-template-columns:minmax(420px,.95fr) minmax(500px,1.05fr);align-items:center;gap:24px;background:#102b3a;border-bottom:3px solid #d89b68}
+.hero-mountain-art{position:absolute;inset:0;z-index:-2}.hero-mountain-art svg{width:100%;height:100%;display:block}.hero-darken{position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#05121cdd,#05121c66 52%,#05121c22),linear-gradient(0deg,#05121c99,transparent 55%)}
+.reference-hero-copy{max-width:650px;position:relative;z-index:2}.hero-overline{font:600 13px var(--font-label);letter-spacing:.12em;color:#dce7e8;margin:0 0 12px}.reference-hero h1{font:600 clamp(38px,4vw,58px)/1.05 var(--font-display)!important;letter-spacing:-.035em;color:#fffaf3!important;text-shadow:0 4px 25px #0008;margin:0 0 4px!important}.hero-role{font:italic 500 clamp(22px,2.2vw,29px) var(--font-display);color:#f1b27f;margin:0}.hero-rule{width:min(420px,80%);height:3px;background:linear-gradient(90deg,#e4a16d,transparent);margin:14px 0}.hero-credentials{font:600 18px var(--font-body);color:#f3f2ec;margin:0 0 8px}.hero-credentials span{color:#e7b78d;padding:0 8px}.hero-affiliation{color:#e1e9e9;font-size:16px;line-height:1.4}.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.hero-actions a{color:#fff!important;text-decoration:none;border:1px solid #f0d8c2a8;border-radius:5px;padding:8px 13px;font:600 13px var(--font-label);letter-spacing:.07em;text-transform:uppercase}.hero-actions a:first-child{background:#9d6847;border-color:#d89b68}
+.hero-science-collage{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:150px 150px;gap:8px;transform:perspective(900px) rotateY(-4deg)}.collage-tile{position:relative;overflow:hidden;border:2px solid #eedac2e6;background:#132a38;box-shadow:0 10px 22px #0005;clip-path:polygon(8% 0,100% 0,92% 100%,0 100%)}.collage-tile svg{width:100%;height:100%;display:block}.collage-label{position:absolute;left:12px;bottom:8px;background:#081923c9;color:#fff2e5;padding:4px 8px;font:600 11px var(--font-label);letter-spacing:.06em;text-transform:uppercase}
+.home-dashboard{display:grid;grid-template-columns:minmax(210px,.78fr) minmax(490px,1.95fr) minmax(280px,.92fr);gap:22px;align-items:start}.home-profile{padding:16px 8px 18px 0;border-right:1px solid #bacdd338}.dashboard-eyebrow{font:600 12px var(--font-label);letter-spacing:.15em;text-transform:uppercase;color:#e5a16d;margin:0 0 8px}.home-profile h2{font:600 24px var(--font-display);color:#f4e9dc;margin:0 0 12px}.home-profile>p:not(.dashboard-eyebrow){font-size:14px;line-height:1.55;color:#d0dcdf;text-align:justify}.profile-link-list{display:flex;flex-direction:column;gap:9px;border-top:1px solid #bacdd338;margin-top:18px;padding-top:15px}.profile-link-list a,.profile-link-list span{display:flex;align-items:center;gap:10px;text-decoration:none;color:#e5edef!important;font-size:14px}.profile-link-list b{width:28px;height:28px;display:grid;place-items:center;background:#183b4e;border:1px solid #5e8592;border-radius:5px;color:#eeb27f;font:700 12px var(--font-label)}
+.dashboard-heading{display:flex;align-items:center;gap:12px;margin:0 0 14px}.dashboard-heading h2{font:600 26px var(--font-display);white-space:nowrap;color:#f4e9dc}.dashboard-heading i{height:2px;background:linear-gradient(90deg,#e4a16d,transparent);flex:1}.heading-mark{color:#e5a16d;font-size:30px;line-height:1}
+.home-research-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}.home-research-card{grid-column:span 2;display:flex;flex-direction:column;overflow:hidden;border:1px solid #daad8766;border-radius:12px;background:linear-gradient(145deg,#183343,#102633);text-decoration:none!important;box-shadow:0 8px 24px #0003;transition:transform .2s,box-shadow .2s}.home-research-card:nth-child(4),.home-research-card:nth-child(5){grid-column:span 3}.home-research-card:hover{transform:translateY(-3px);box-shadow:0 14px 30px #0005}.home-research-card>svg{width:100%;height:112px;display:block}.home-card-copy{padding:10px 13px 13px}.home-card-copy h3{font:600 17px/1.1 var(--font-display);color:#fff1e2;margin:0 0 6px}.home-card-copy p{font-size:13px;line-height:1.38;color:#d3dfe1}
+.home-right-column{display:flex;flex-direction:column;gap:14px;min-width:0}.home-pt-card{margin:0;border:1px solid #bacdd359;border-radius:11px;background:linear-gradient(145deg,#122b3a,#0d202c);padding:12px;box-shadow:0 8px 24px #0003}.home-pt-card canvas{width:100%;height:auto;display:block;aspect-ratio:10/8}.home-pt-card figcaption{font:italic 13px/1.35 var(--font-body);color:#d0dadd;margin-top:5px}.home-news-card{border:1px solid #daad87b0;border-radius:13px;padding:13px 15px;background:linear-gradient(145deg,#142c3a,#10232f)}.home-news-card .dashboard-heading{margin-bottom:8px}.home-news-card .dashboard-heading h2{font-size:23px}.home-news-list{list-style:none;padding:0;margin:0}.home-news-list li{position:relative;padding:8px 0 8px 19px;border-top:1px solid #bacdd32e}.home-news-list li:before{content:"";position:absolute;left:1px;top:14px;width:9px;height:9px;border-radius:50%;background:#efbc8f}.home-news-list time{display:block;color:#f1bb8b;font:600 13px var(--font-label);margin-bottom:2px}.home-news-list p{font-size:13px;line-height:1.35;color:#e0e8e9}
+@media(max-width:1250px){.reference-header-inner{grid-template-columns:1fr auto!important}.university-lockup{display:none}.reference-nav{grid-column:1/-1;align-items:flex-start}.reference-nav .nav-main,.reference-nav .nav-secondary{justify-content:flex-start}.home-dashboard{grid-template-columns:minmax(190px,.7fr) minmax(430px,1.5fr)}.home-right-column{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr}}
+@media(max-width:900px){.reference-hero{grid-template-columns:1fr;min-height:0;padding:42px 28px}.hero-science-collage{max-width:680px;width:100%;margin:8px auto 0;grid-template-rows:120px 120px}.home-dashboard{grid-template-columns:1fr 1.8fr}.home-profile{grid-row:span 2}.home-right-column{grid-column:2;display:flex}}
+@media(max-width:700px){.reference-header-inner{display:flex!important;flex-wrap:wrap;min-height:0!important;padding:10px 16px!important}.reference-brand .brand-name{font-size:25px!important}.brand-mountain{width:72px}.reference-nav{display:none!important;position:static!important;flex-basis:100%;background:#0b1d29!important;border:1px solid #34515d;border-radius:8px;padding:8px!important}.reference-nav.open{display:flex!important}.reference-nav .nav-main,.reference-nav .nav-secondary{flex-direction:column;align-items:stretch;width:100%}.reference-nav .nav-secondary span{display:none}.menu-btn{display:inline-block;margin-left:auto}main.wrap{padding:0 15px 50px!important}.reference-hero{margin:0 -15px 20px;padding:34px 20px}.reference-hero h1{font-size:39px!important}.hero-science-collage{grid-template-rows:100px 100px;gap:6px}.collage-label{font-size:9px;left:6px;bottom:5px}.home-dashboard{grid-template-columns:1fr}.home-profile{border-right:0;border-bottom:1px solid #bacdd338;padding:0 0 16px}.home-right-column{grid-column:auto;display:flex}.home-research-grid{grid-template-columns:1fr 1fr;gap:9px}.home-research-card,.home-research-card:nth-child(4),.home-research-card:nth-child(5){grid-column:span 1}.home-research-card>svg{height:95px}.home-card-copy h3{font-size:15px}.home-card-copy p{font-size:12px}}
+@media(max-width:420px){.reference-brand .brand-sub{font-size:10px;white-space:normal}.brand-mountain{width:55px}.home-research-grid{grid-template-columns:1fr}.home-research-card,.home-research-card:nth-child(4),.home-research-card:nth-child(5){grid-column:1}.home-research-card>svg{height:125px}}
+</style>
+
+
+<div class="research-image-lightbox" id="research-image-lightbox" role="dialog" aria-modal="true" aria-label="Enlarged research theme image">
+  <button type="button" aria-label="Close enlarged image">&times;</button>
+  <img id="research-image-lightbox-image" src="" alt="">
+</div>
+<script>
+(() => {
+  const overlay = document.getElementById('research-image-lightbox');
+  if (!overlay) return;
+  const enlarged = document.getElementById('research-image-lightbox-image');
+  const close = overlay.querySelector('button');
+  let priorFocus = null;
+
+  function closeViewer() {
+    overlay.classList.remove('is-open');
+    enlarged.removeAttribute('src');
+    enlarged.alt = '';
+    document.body.style.overflow = '';
+    if (priorFocus) priorFocus.focus();
+  }
+
+  document.querySelectorAll('.home-research-card > img').forEach((img) => {
+    img.tabIndex = 0;
+    img.setAttribute('role', 'button');
+    img.setAttribute('aria-label', 'Enlarge image: ' + (img.alt || 'Research theme'));
+    function openViewer(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      priorFocus = img;
+      enlarged.src = img.currentSrc || img.src;
+      enlarged.alt = img.alt || 'Enlarged research theme image';
+      overlay.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      close.focus();
+    }
+    img.addEventListener('click', openViewer);
+    img.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') openViewer(event);
+    });
+  });
+
+  close.addEventListener('click', closeViewer);
+  overlay.addEventListener('click', (event) => {
+    if (event.target === overlay) closeViewer();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && overlay.classList.contains('is-open')) closeViewer();
+  });
+})();
+</script>
+
+</body>
+</html>
+
